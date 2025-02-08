@@ -8,8 +8,7 @@ function Logo() {
       <div className="flex flex-col">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-400">Oasis Wellness Foundation.</h1>
         <div className="flex flex-col">
-          <p className="text-sm md:text-base text-coral-500">Addiction Prevention, Treatment, Recovery</p>
-          <p className="text-sm md:text-base text-coral-500">And Rehabilitation</p>
+          <p className="text-sm md:text-base text-coral-500">Addiction Prevention, Treatment, Recovery and Rehabilitation</p>
         </div>
         <div className="flex items-center gap-2 mt-1">
           <div className="h-px bg-coral-500 w-12"></div>
@@ -24,15 +23,28 @@ function Logo() {
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsAtTop(window.scrollY < 20);
+      const currentScrollY = window.scrollY;
+      setIsAtTop(currentScrollY < 20);
+      
+      // Show navbar when scrolling up, hide when scrolling down
+      // But always show it at the top of the page
+      if (currentScrollY < 20) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(currentScrollY < lastScrollY);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,9 +63,11 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50">
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
         <div className={`relative transition-all duration-500 ${
-          isAtTop ? 'bg-white/70' : 'bg-white shadow-md'
+          isAtTop ? 'bg-white/60' : 'bg-white shadow-md'
         } rounded-b-[2.5rem]`}>
           <div className="max-w-6xl mx-auto px-4 py-3">
             <div className="flex items-center justify-between">
@@ -165,7 +179,7 @@ function App() {
           </header>
 
           {/* About Us */}
-          <section id="about" className="py-20 px-4 bg-gray-10">
+          <section id="about" className="py-20 px-4 bg-gray-50">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">About Us</h2>
               <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -210,8 +224,8 @@ function App() {
             </div>
           </section>
 
-          {/* Testimonials */}
-         { /*<section id="testimonials" className="py-20 px-4 bg-gray-50">
+          {/* Testimonials 
+          <section id="testimonials" className="py-20 px-4 bg-gray-50">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Success Stories</h2>
               <div className="grid md:grid-cols-3 gap-8">
@@ -227,7 +241,7 @@ function App() {
                 ))}
               </div>
             </div>
-          </section>*/}
+          </section> */}
 
           {/* Contact Section */}
           <section id="contact" className="py-20 px-4">
