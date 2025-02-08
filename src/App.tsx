@@ -224,7 +224,7 @@ function App() {
             </div>
           </section>
 
-          {/* Testimonials 
+          {/* Testimonials */}
           <section id="testimonials" className="py-20 px-4 bg-gray-50">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Success Stories</h2>
@@ -241,7 +241,7 @@ function App() {
                 ))}
               </div>
             </div>
-          </section> */}
+          </section>
 
           {/* Contact Section */}
           <section id="contact" className="py-20 px-4">
@@ -253,7 +253,7 @@ function App() {
                   <div className="space-y-4">
                     <div className="flex items-center">
                       <Phone className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>+254 712 929 460 / +254 711 389 345</p>
+                      <p>+254 712 929 460 </p>
                     </div>
                     <div className="flex items-center">
                       <Mail className="w-6 h-6 text-coral-500 mr-3" />
@@ -351,7 +351,7 @@ function App() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-5 h-5 text-coral-500" />
-                  <p>24/7 Helpline: +254 712 929 460</p>
+                  <p>24/7 Helpline: +254 711 389 345</p>
                 </div>
               </div>
             </div>
