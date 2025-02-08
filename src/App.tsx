@@ -3,18 +3,18 @@ import { Phone, Mail, MapPin, Heart, Users, Brain, Sparkles, ArrowRight, Message
 
 function Logo() {
   return (
-    <div className="flex items-center gap-4 lg:gap-6">
+    <div className="flex items-center gap-4">
       <img src="https://i.imgur.com/xgNrrHt.png" alt="Oasis Wellness Foundation Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
       <div className="flex flex-col">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-400 leading-tight">Oasis Wellness Foundation.</h1>
-        <div className="flex flex-col leading-tight">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-400">Oasis Wellness Foundation.</h1>
+        <div className="flex flex-col">
           <p className="text-sm md:text-base text-coral-500">Addiction Prevention, Treatment, Recovery</p>
           <p className="text-sm md:text-base text-coral-500">And Rehabilitation</p>
         </div>
-        <div className="hidden md:flex items-center gap-2 mt-1">
-          <div className="h-px bg-coral-500 w-16"></div>
+        <div className="flex items-center gap-2 mt-1">
+          <div className="h-px bg-coral-500 w-12"></div>
           <p className="text-sm md:text-base text-teal-400 italic">we care</p>
-          <div className="h-px bg-coral-500 w-16"></div>
+          <div className="h-px bg-coral-500 w-12"></div>
         </div>
       </div>
     </div>
@@ -22,29 +22,17 @@ function Logo() {
 }
 
 function App() {
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
 
   useEffect(() => {
-    const controlNavbar = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY < lastScrollY || currentScrollY < 100) {
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false);
-      }
-      
-      setLastScrollY(currentScrollY);
+    const handleScroll = () => {
+      setIsAtTop(window.scrollY < 20);
     };
 
-    window.addEventListener('scroll', controlNavbar);
-    
-    return () => {
-      window.removeEventListener('scroll', controlNavbar);
-    };
-  }, [lastScrollY]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,76 +48,81 @@ function App() {
     window.open(whatsappUrl, '_blank');
   };
 
-  const NavLinks = ({ className = "", onClick = () => {} }) => (
-    <>
-      <a 
-        href="#about" 
-        onClick={onClick}
-        className={`px-4 py-2 rounded-full border-2 border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white transition-colors text-sm font-medium ${className}`}
-      >
-        About
-      </a>
-      <a 
-        href="#services" 
-        onClick={onClick}
-        className={`px-4 py-2 rounded-full border-2 border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-colors text-sm font-medium ${className}`}
-      >
-        Services
-      </a>
-      <a 
-        href="#testimonials" 
-        onClick={onClick}
-        className={`px-4 py-2 rounded-full border-2 border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white transition-colors text-sm font-medium ${className}`}
-      >
-        Stories
-      </a>
-      <a 
-        href="#contact" 
-        onClick={onClick}
-        className={`px-4 py-2 rounded-full border-2 border-coral-500 text-coral-500 hover:bg-coral-500 hover:text-white transition-colors text-sm font-medium ${className}`}
-      >
-        Contact
-      </a>
-    </>
-  );
-
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav 
-        className={`fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl bg-white/95 backdrop-blur-sm shadow-lg z-50 transition-all duration-300 rounded-2xl ${
-          isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-        }`}
-      >
-        <div className="px-4 py-3">
-          <div className="flex justify-between items-center">
-            <Logo />
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex gap-4">
-              <NavLinks />
+      <nav className="fixed top-0 left-0 right-0 z-50">
+        <div className={`relative transition-all duration-500 ${
+          isAtTop ? 'bg-white/70' : 'bg-white shadow-md'
+        } rounded-b-[2.5rem]`}>
+          <div className="max-w-6xl mx-auto px-4 py-3">
+            <div className="flex items-center justify-between">
+              <Logo />
+              
+              {/* Desktop Navigation */}
+              <div className="hidden lg:flex items-center space-x-6">
+                <a href="#about" className="text-gray-700 hover:text-teal-400 transition-colors px-4 py-2 rounded-full hover:bg-gray-50">About</a>
+                <a href="#services" className="text-gray-700 hover:text-teal-400 transition-colors px-4 py-2 rounded-full hover:bg-gray-50">Services</a>
+                <a href="#testimonials" className="text-gray-700 hover:text-teal-400 transition-colors px-4 py-2 rounded-full hover:bg-gray-50">Stories</a>
+                <a href="#contact" className="bg-coral-500 text-white px-6 py-2 rounded-full hover:bg-coral-600 transition-colors">
+                  Contact Us
+                </a>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="lg:hidden p-2 text-gray-600 hover:text-gray-900 focus:outline-none"
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
             </div>
-            {/* Mobile Menu Button */}
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 text-gray-600 hover:text-gray-900"
+
+            {/* Mobile Navigation */}
+            <div
+              className={`lg:hidden transition-all duration-300 ease-in-out ${
+                isMenuOpen
+                  ? 'max-h-64 opacity-100 visible mt-4'
+                  : 'max-h-0 opacity-0 invisible'
+              }`}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-          
-          {/* Mobile Navigation */}
-          <div className={`lg:hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 opacity-100 py-4' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-            <div className="flex flex-col gap-3">
-              <NavLinks 
-                className="w-full text-center" 
-                onClick={() => setIsMenuOpen(false)}
-              />
+              <div className="flex flex-col space-y-4 pb-4">
+                <a
+                  href="#about"
+                  className="text-gray-700 hover:text-teal-400 transition-colors px-6 py-2 rounded-full hover:bg-gray-50"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  About
+                </a>
+                <a
+                  href="#services"
+                  className="text-gray-700 hover:text-teal-400 transition-colors px-6 py-2 rounded-full hover:bg-gray-50"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Services
+                </a>
+                <a
+                  href="#testimonials"
+                  className="text-gray-700 hover:text-teal-400 transition-colors px-6 py-2 rounded-full hover:bg-gray-50"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Stories
+                </a>
+                <a
+                  href="#contact"
+                  className="bg-coral-500 text-white px-6 py-2 rounded-full hover:bg-coral-600 transition-colors text-center"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Contact Us
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Main Content with Watermark */}
+      {/* Content */}
       <div className="relative">
         {/* Watermark */}
         <div 
@@ -148,16 +141,22 @@ function App() {
         {/* Content */}
         <div className="relative z-10">
           {/* Hero Section */}
-          <header className="relative h-screen flex items-center justify-center" style={{
-            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}>
+          <header 
+            className="relative min-h-screen flex items-center justify-center pt-32" 
+            style={{
+              backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+          >
             <div className="text-center text-white px-4">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">Overcoming Addiction, One Step at a Time</h1>
-              <p className="text-xl md:text-2xl mb-8 text-coral-100">Addiction Prevention, Treatment, Recovery And Rehabilitation</p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Overcoming Addiction, One Step at a Time</h1>
+              <p className="text-lg md:text-xl lg:text-2xl mb-8 text-coral-100">Addiction Prevention, Treatment, Recovery And Rehabilitation</p>
               <div className="flex flex-col items-center gap-4">
-                <a href="#contact" className="bg-coral-500 hover:bg-coral-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                <a 
+                  href="#contact" 
+                  className="bg-coral-500 hover:bg-coral-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105"
+                >
                   Get Help Now
                 </a>
                 <p className="text-teal-300 italic">we care</p>
@@ -166,7 +165,7 @@ function App() {
           </header>
 
           {/* About Us */}
-          <section id="about" className="py-20 px-4 bg-gray-50">
+          <section id="about" className="py-20 px-4 bg-gray-10">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">About Us</h2>
               <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -212,7 +211,7 @@ function App() {
           </section>
 
           {/* Testimonials */}
-          <section id="testimonials" className="py-20 px-4 bg-gray-50">
+         { /*<section id="testimonials" className="py-20 px-4 bg-gray-50">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Success Stories</h2>
               <div className="grid md:grid-cols-3 gap-8">
@@ -228,7 +227,7 @@ function App() {
                 ))}
               </div>
             </div>
-          </section>
+          </section>*/}
 
           {/* Contact Section */}
           <section id="contact" className="py-20 px-4">
