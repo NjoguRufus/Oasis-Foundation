@@ -443,7 +443,7 @@ function App() {
                     </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>Ruiru Way Bridge Opp Ruiru Golf Club Group, Floor 4, Room 4</p>
+                      <p>Ruiru Way Bridge Opp Ruiru Golf Club, Ground Floor 4, Room 4</p>
                     </div>
                     <p className="ml-9">P.O. Box: 64069-00620, Muthaiga</p>
                   </div>
@@ -527,7 +527,7 @@ function App() {
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-coral-500" />
                   <div>
-                    <p>Ruiru Waybridge Opposite Ruiru Golf Club Group Floor Room 4</p>
+                    <p>Ruiru Waybridge Opposite Ruiru Golf Club, Ground Floor Room 4</p>
                     <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
                   </div>
                 </div>
