@@ -8,7 +8,7 @@ function Logo() {
       <div className="flex flex-col">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-400">Oasis Wellness Foundation.</h1>
         <div className="flex flex-col">
-          <p className="text-sm md:text-base text-coral-500">Addiction Prevention, Treatment, Recovery and Rehabilitation</p>
+          <p className="text-sm md:text-base text-coral-500">Addiction Prevention, Treatment, Recovery and Biopsychosocial approach</p>
         </div>
         <div className="flex items-center gap-2 mt-1">
           <div className="h-px bg-coral-500 w-12"></div>
@@ -297,7 +297,7 @@ function App() {
             <div className="relative z-10 min-h-screen flex items-center justify-center pt-32">
               <div className="text-center text-white px-4">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Overcoming Addiction, One Step at a Time</h1>
-                <p className="text-lg md:text-xl lg:text-2xl mb-8 text-coral-100">Addiction Prevention, Treatment, Recovery And Rehabilitation</p>
+                <p className="text-lg md:text-xl lg:text-2xl mb-8 text-coral-100">Addiction Prevention, Treatment, Recovery And Biopsychosocial approach</p>
                 <div className="flex flex-col items-center gap-4">
                   <a 
                     href="#contact" 
@@ -413,7 +413,7 @@ function App() {
                   { icon: <Brain className="w-12 h-12 text-coral-500" />, title: 'Addiction Prevention', description: 'Proactive education and support programs' },
                   { icon: <Heart className="w-12 h-12 text-teal-400" />, title: 'Treatment Programs', description: 'Personalized recovery plans' },
                   { icon: <Users className="w-12 h-12 text-coral-500" />, title: 'Recovery & Support', description: 'Ongoing guidance and community' },
-                  { icon: <Sparkles className="w-12 h-12 text-teal-400" />, title: 'Rehabilitation Services', description: 'Comprehensive healing approach' }
+                  { icon: <Sparkles className="w-12 h-12 text-teal-400" />, title: 'Biopsychosocial approach Services', description: 'Comprehensive healing approach' }
                 ].map((service, index) => (
                   <div key={index} className="bg-white p-6 rounded-lg shadow-lg text-center hover:transform hover:scale-105 transition duration-300">
                     <div className="flex justify-center mb-4">{service.icon}</div>
