@@ -8,7 +8,7 @@ function Logo() {
       <div className="flex flex-col">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-400">Oasis Wellness Foundation.</h1>
         <div className="flex flex-col">
-          <p className="text-sm md:text-base text-coral-500">Addiction Prevention, Treatment, Recovery and Biopsychosocial approach</p>
+          <p className="text-sm md:text-base text-coral-500">Addiction Prevention, Treatment, and Recovery</p>
         </div>
         <div className="flex items-center gap-2 mt-1">
           <div className="h-px bg-coral-500 w-12"></div>
@@ -118,7 +118,6 @@ function ImageSlideshow() {
 
   return (
     <div className="relative w-full h-full overflow-hidden">
-      {/* Slides */}
       {images.map((_, index) => (
         <div
           key={index}
@@ -128,7 +127,6 @@ function ImageSlideshow() {
         />
       ))}
 
-      {/* Navigation Buttons */}
       <div className="absolute inset-0 flex items-center justify-between p-4">
         <button
           onClick={prevSlide}
@@ -146,7 +144,6 @@ function ImageSlideshow() {
         </button>
       </div>
 
-      {/* Indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {images.map((_, index) => (
           <button
@@ -205,7 +202,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
@@ -216,7 +212,6 @@ function App() {
             <div className="flex items-center justify-between">
               <Logo />
               
-              {/* Desktop Navigation */}
               <div className="hidden lg:flex items-center space-x-6">
                 <a href="#about" className="text-gray-700 hover:text-teal-400 transition-colors px-4 py-2 rounded-full hover:bg-gray-50">About</a>
                 <a href="#services" className="text-gray-700 hover:text-teal-400 transition-colors px-4 py-2 rounded-full hover:bg-gray-50">Services</a>
@@ -225,7 +220,6 @@ function App() {
                 </a>
               </div>
 
-              {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="lg:hidden p-2 text-gray-600 hover:text-gray-900 focus:outline-none"
@@ -235,7 +229,6 @@ function App() {
               </button>
             </div>
 
-            {/* Mobile Navigation */}
             <div
               className={`lg:hidden transition-all duration-300 ease-in-out ${
                 isMenuOpen
@@ -271,9 +264,7 @@ function App() {
         </div>
       </nav>
 
-      {/* Content */}
       <div className="relative">
-        {/* Watermark */}
         <div 
           className="fixed inset-0 pointer-events-none opacity-5 flex items-center justify-center"
           style={{
@@ -287,9 +278,7 @@ function App() {
           />
         </div>
 
-        {/* Content */}
         <div className="relative z-10">
-          {/* Hero Section */}
           <header className="relative min-h-screen">
             <div className="absolute inset-0">
               <ImageSlideshow />
@@ -297,7 +286,7 @@ function App() {
             <div className="relative z-10 min-h-screen flex items-center justify-center pt-32">
               <div className="text-center text-white px-4">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Overcoming Addiction, One Step at a Time</h1>
-                <p className="text-lg md:text-xl lg:text-2xl mb-8 text-coral-100">Addiction Prevention, Treatment, Recovery And Biopsychosocial approach</p>
+                <p className="text-lg md:text-xl lg:text-2xl mb-8 text-coral-100">Addiction Prevention, Treatment, and Recovery</p>
                 <div className="flex flex-col items-center gap-4">
                   <a 
                     href="#contact" 
@@ -311,7 +300,6 @@ function App() {
             </div>
           </header>
 
-          {/* About Us */}
           <section id="about" className="py-20 px-4 bg-gray-50">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">About Us</h2>
@@ -324,24 +312,22 @@ function App() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-semibold mb-4 text-teal-400">Our Mission</h3>
+                  <h3 className="text-2xl font-semibold mb-4 text-teal-400">Our Story</h3>
                   <p className="text-gray-600 mb-6">
-                    At Oasis Wellness Foundation, we believe in providing comprehensive support for individuals struggling with addiction. Our approach combines evidence-based treatment with compassionate care to help our clients achieve lasting recovery.
+                    Oasis Wellness Foundation was established in 2020 after recognizing the urgent need to support individuals struggling with drug and substance disorders. Many were willing to recover but lacked the necessary support system.
                   </p>
                   <p className="text-gray-600">
-                    We understand that every journey is unique, which is why we offer personalized treatment plans tailored to each individual's needs and circumstances.
+                    Our organization is dedicated to providing both inpatient and outpatient care, guiding individuals—both male and female—on their journey to recovery. Through a compassionate and structured approach, we strive to empower individuals to regain control of their lives and achieve lasting wellness.
                   </p>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Our Impact Section */}
           <section className="py-20 px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Our Impact</h2>
               <div className="space-y-16">
-                {/* Direct Assistance Impact */}
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                   <div>
                     <img 
@@ -361,7 +347,6 @@ function App() {
                   </div>
                 </div>
 
-                {/* First Impact Item */}
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                   <div className="order-2 md:order-1">
                     <h3 className="text-2xl font-semibold mb-4 text-teal-400">Raising Awareness</h3>
@@ -381,7 +366,6 @@ function App() {
                   </div>
                 </div>
 
-                {/* Second Impact Item */}
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                   <div>
                     <img 
@@ -404,7 +388,6 @@ function App() {
             </div>
           </section>
 
-          {/* Services */}
           <section id="services" className="py-20 px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Our Services</h2>
@@ -413,7 +396,7 @@ function App() {
                   { icon: <Brain className="w-12 h-12 text-coral-500" />, title: 'Addiction Prevention', description: 'Proactive education and support programs' },
                   { icon: <Heart className="w-12 h-12 text-teal-400" />, title: 'Treatment Programs', description: 'Personalized recovery plans' },
                   { icon: <Users className="w-12 h-12 text-coral-500" />, title: 'Recovery & Support', description: 'Ongoing guidance and community' },
-                  { icon: <Sparkles className="w-12 h-12 text-teal-400" />, title: 'Biopsychosocial approach Services', description: 'Comprehensive healing approach' }
+                  { icon: <Sparkles className="w-12 h-12 text-teal-400" />, title: 'Path to Sobriety', description: 'Biopsychosocial Approach' }
                 ].map((service, index) => (
                   <div key={index} className="bg-white p-6 rounded-lg shadow-lg text-center hover:transform hover:scale-105 transition duration-300">
                     <div className="flex justify-center mb-4">{service.icon}</div>
@@ -425,7 +408,6 @@ function App() {
             </div>
           </section>
 
-          {/* Contact Section */}
           <section id="contact" className="py-20 px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Get Help Today</h2>
@@ -443,7 +425,7 @@ function App() {
                     </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>Ruiru Way Bridge Opp Ruiru Golf Club, Ground Floor 4, Room 4</p>
+                      <p>Ruiru Way Bridge Opp Ruiru Golf Club Ground Floor 4, Room 4</p>
                     </div>
                     <p className="ml-9">P.O. Box: 64069-00620, Muthaiga</p>
                   </div>
@@ -509,7 +491,6 @@ function App() {
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="bg-gray-900 text-white rounded-t-[2.5rem]">
         <div className="max-w-6xl mx-auto px-4 py-12">
           <div className="grid md:grid-cols-2 gap-8">
@@ -527,7 +508,7 @@ function App() {
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-coral-500" />
                   <div>
-                    <p>Ruiru Waybridge Opposite Ruiru Golf Club, Ground Floor Room 4</p>
+                    <p>Ruiru Way Bridge Opp Ruiru Golf Club Ground Floor 4, Room 4</p>
                     <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
                   </div>
                 </div>
