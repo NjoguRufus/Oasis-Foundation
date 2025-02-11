@@ -395,7 +395,7 @@ function App() {
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
                   { 
-                    icon: <img src="https://i.imgur.com/8kpB4Df.png" alt="Prevention Icon" className="w-12 h-12" />, 
+                    icon: <img src="https://i.imgur.com/n3wjXfe.png" alt="Prevention Icon" className="w-12 h-12" />, 
                     title: 'Addiction Prevention', 
                     description: 'Proactive sensitization, physcoeducation and support programs' 
                   },
@@ -524,7 +524,7 @@ function App() {
                     </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>Ruiru Way Bridge Opp Ruiru Golf Club Ground Floor, Room 4</p>
+                      <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
                     </div>
                     <p className="ml-9">P.O. Box: 64069-00620, Muthaiga</p>
                   </div>
@@ -607,7 +607,7 @@ function App() {
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-coral-500" />
                   <div>
-                    <p>Ruiru Way Bridge Opp Ruiru Golf Club Ground Floor, Room 4</p>
+                    <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
                     <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
                   </div>
                 </div>
