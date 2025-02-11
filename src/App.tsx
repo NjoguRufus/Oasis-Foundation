@@ -6,7 +6,7 @@ function Logo() {
     <div className="flex items-center gap-4">
       <img src="https://i.imgur.com/xgNrrHt.png" alt="Oasis Wellness Foundation Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
       <div className="flex flex-col">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-400">Oasis Wellness Foundation.</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Oasis Wellness Foundation.</h1>
         <div className="flex flex-col">
           <p className="text-sm md:text-base text-coral-500">Addiction Prevention, Treatment, and Recovery</p>
         </div>
@@ -28,10 +28,15 @@ function ImageSlideshow() {
   const images = [
     { url: "https://i.imgur.com/mo8m2o8.jpg", alt: "Oasis Wellness Event 1" },
     { url: "https://i.imgur.com/rajC5Hi.jpg", alt: "Oasis Wellness Event 2" },
-    { url: "https://i.imgur.com/97589Gj.jpg", alt: "Oasis Wellness Event 3" },
-    { url: "https://i.imgur.com/h2VAIDb.jpg", alt: "Oasis Wellness Event 4" },
-    { url: "https://i.imgur.com/lg2bnJJ.jpg", alt: "Oasis Wellness Event 5" },
-    { url: "https://i.imgur.com/nbqfHii.jpg", alt: "Oasis Wellness Event 6" }
+    { url: "https://i.imgur.com/W58GEyq.jpg", alt: "Oasis Wellness Event 3" },
+    { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Wellness Event 4" },
+    { url: "https://i.imgur.com/r5MUAmR.jpg", alt: "Oasis Wellness Event 5" },
+    { url: "https://i.imgur.com/FQVyTQy.jpg", alt: "Oasis Wellness Event 6" },
+    { url: "https://i.imgur.com/gb17eeO.jpg", alt: "Oasis Wellness Event 7" },
+    { url: "https://i.imgur.com/p1BerMb.jpg", alt: "Oasis Wellness Event 8" }
+    
+
+    
   ];
 
   const nextSlide = useCallback(() => {
