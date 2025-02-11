@@ -393,10 +393,26 @@ function App() {
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Our Services</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
-                  { icon: <Brain className="w-12 h-12 text-coral-500" />, title: 'Addiction Prevention', description: 'Proactive education and support programs' },
-                  { icon: <Heart className="w-12 h-12 text-teal-400" />, title: 'Treatment Programs', description: 'Personalized recovery plans' },
-                  { icon: <Users className="w-12 h-12 text-coral-500" />, title: 'Recovery & Support', description: 'Ongoing guidance and community' },
-                  { icon: <Sparkles className="w-12 h-12 text-teal-400" />, title: 'Path to Sobriety', description: 'Biopsychosocial Approach' }
+                  { 
+                    icon: <img src="https://i.imgur.com/8kpB4Df.png" alt="Prevention Icon" className="w-12 h-12" />, 
+                    title: 'Addiction Prevention', 
+                    description: 'Proactive sensitization, physcoeducation and support programs' 
+                  },
+                  { 
+                    icon: <Brain className="w-12 h-12 text-teal-400" />, 
+                    title: 'Treatment Program', 
+                    description: 'Biopsychosocial approach' 
+                  },
+                  { 
+                    icon: <Sparkles className="w-12 h-12 text-coral-500" />, 
+                    title: 'Recovery & Rehabilitation Support', 
+                    description: 'Inpatient and Outpatient Individual support' 
+                  },
+                  { 
+                    icon: <Users className="w-12 h-12 text-teal-400" />, 
+                    title: 'After Care Program', 
+                    description: 'AA meetings and follow ups' 
+                  }
                 ].map((service, index) => (
                   <div key={index} className="bg-white p-6 rounded-lg shadow-lg text-center hover:transform hover:scale-105 transition duration-300">
                     <div className="flex justify-center mb-4">{service.icon}</div>
@@ -404,6 +420,51 @@ function App() {
                     <p className="text-gray-600">{service.description}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="py-20 px-4 bg-gray-50">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Our Gallery</h2>
+              <div className="relative">
+                <div className="flex overflow-x-auto pb-8 gap-4 snap-x snap-mandatory scrollbar-hide">
+                  {[
+                    "https://i.imgur.com/kRm1neK.jpg",
+                    "https://i.imgur.com/3dltxcb.jpg",
+                    "https://i.imgur.com/z3FuBsu.jpg",
+                    "https://i.imgur.com/L8nmapU.jpg",
+                    "https://i.imgur.com/ofDzZFZ.jpg",
+                    "https://i.imgur.com/qg2eJzU.jpg",
+                    "https://i.imgur.com/V9ZjqhE.jpg",
+                    "https://i.imgur.com/Cu7GPbZ.jpg",
+                    "https://i.imgur.com/65o3s72.jpg",
+                    "https://i.imgur.com/cdCAX98.jpg",
+                    "https://i.imgur.com/ArBmc2P.jpg",
+                    "https://i.imgur.com/u30q5RP.jpg",
+                    "https://i.imgur.com/p1BerMb.jpg",
+                    "https://i.imgur.com/gb17eeO.jpg",
+                    "https://i.imgur.com/ZTa9vbL.jpg",
+                    "https://i.imgur.com/KSP3DO4.jpg",
+                    "https://i.imgur.com/oegLCYZ.jpg",
+                    "https://i.imgur.com/qorLe79.jpg",
+                    "https://i.imgur.com/b2IJYhD.jpg"
+                  ].map((imageUrl, index) => (
+                    <div 
+                      key={index} 
+                      className="flex-none snap-center"
+                    >
+                      <img
+                        src={imageUrl}
+                        alt={`Gallery image ${index + 1}`}
+                        className="w-72 h-72 object-cover rounded-lg shadow-lg hover:transform hover:scale-105 transition duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-gray-50 to-transparent w-12" />
+                <div className="absolute inset-y-0 right-0 bg-gradient-to-l from-gray-50 to-transparent w-12" />
               </div>
             </div>
           </section>
