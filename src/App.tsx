@@ -28,7 +28,7 @@ function ImageSlideshow() {
   const images = [
     { url: "https://i.imgur.com/mo8m2o8.jpg", alt: "Oasis Wellness Event 1" },
     { url: "https://i.imgur.com/rajC5Hi.jpg", alt: "Oasis Wellness Event 2" },
-    { url: "https://i.imgur.com/W58GEyq.jpg", alt: "Oasis Wellness Event 3" },
+    { url: "https://i.imgur.com/q3lmvYB.jpg", alt: "Oasis Wellness Event 3" },
     { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Wellness Event 4" },
     { url: "https://i.imgur.com/r5MUAmR.jpg", alt: "Oasis Wellness Event 5" },
     { url: "https://i.imgur.com/FQVyTQy.jpg", alt: "Oasis Wellness Event 6" },
