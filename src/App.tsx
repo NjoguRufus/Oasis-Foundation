@@ -26,14 +26,14 @@ function ImageSlideshow() {
   const [direction, setDirection] = useState<'left' | 'right'>('right');
 
   const images = [
-    { url: "https://i.imgur.com/mo8m2o8.jpg", alt: "Oasis Wellness Event 1" },
-    { url: "https://i.imgur.com/rajC5Hi.jpg", alt: "Oasis Wellness Event 2" },
-    { url: "https://i.imgur.com/q3lmvYB.jpg", alt: "Oasis Wellness Event 3" },
-    { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Wellness Event 4" },
-    { url: "https://i.imgur.com/r5MUAmR.jpg", alt: "Oasis Wellness Event 5" },
-    { url: "https://i.imgur.com/FQVyTQy.jpg", alt: "Oasis Wellness Event 6" },
-    { url: "https://i.imgur.com/gb17eeO.jpg", alt: "Oasis Wellness Event 7" },
-    { url: "https://i.imgur.com/p1BerMb.jpg", alt: "Oasis Wellness Event 8" }
+    { url: "https://i.imgur.com/iIc6xs5.jpg", alt: "Oasis Wellness Event 1" },
+
+    { url: "https://i.imgur.com/q3lmvYB.jpg", alt: "Oasis Wellness Event 2" },
+    
+    { url: "https://i.imgur.com/p1BerMb.jpg", alt: "Oasis Wellness Event 3" },
+   
+    { url: " https://i.imgur.com/L8nmapU.jpg", alt: "Oasis Wellness Event 4" },
+    { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Wellness Event 5" }
     
 
     
@@ -412,7 +412,7 @@ function App() {
                   { 
                     icon: <Sparkles className="w-12 h-12 text-coral-500" />, 
                     title: 'Recovery & Rehabilitation Support', 
-                    description: 'Inpatient and Outpatient Individual support' 
+                    description: 'Inpatient and Outpatient Individualized support' 
                   },
                   { 
                     icon: <Users className="w-12 h-12 text-teal-400" />, 
@@ -474,8 +474,11 @@ function App() {
                 <div className="flex overflow-x-auto pb-8 gap-4 snap-x snap-mandatory scrollbar-hide">
                   {[
                     "https://i.imgur.com/kRm1neK.jpg",
-                    "https://i.imgur.com/3dltxcb.jpg",
                     "https://i.imgur.com/z3FuBsu.jpg",
+                    "https://i.imgur.com/3dltxcb.jpg",
+                    "https://i.imgur.com/nbqfHii.jpg",
+                    "https://i.imgur.com/97589Gj.jpg",
+                  
                     "https://i.imgur.com/L8nmapU.jpg",
                     "https://i.imgur.com/ofDzZFZ.jpg",
                     "https://i.imgur.com/qg2eJzU.jpg",
