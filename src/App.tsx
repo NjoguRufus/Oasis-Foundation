@@ -402,7 +402,7 @@ function App() {
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
                   { 
-                    icon: <img src="https://i.imgur.com/n3wjXfe.png" alt="Prevention Icon" className="w-12 h-12" />, 
+                    icon: <img src="https://i.imgur.com/4nbFFCV.png" alt="Prevention Icon" className="w-12 h-12" />, 
                     title: 'Addiction Prevention', 
                     description: 'Proactive sensitization, physcoeducation and support programs' 
                   },
