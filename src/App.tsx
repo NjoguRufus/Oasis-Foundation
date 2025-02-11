@@ -167,6 +167,7 @@ function App() {
   const [isAtTop, setIsAtTop] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [showCounselingRoom, setShowCounselingRoom] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -426,7 +427,44 @@ function App() {
 
           <section className="py-20 px-4 bg-gray-50">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Our Gallery</h2>
+              <div className="flex justify-between items-center mb-12">
+                <h2 className="text-4xl font-bold text-gray-800">Our Gallery</h2>
+                <button
+                  onClick={() => setShowCounselingRoom(true)}
+                  className="bg-teal-400 hover:bg-teal-500 text-white px-4 py-2 rounded-full transition-colors duration-300"
+                >
+                  Click to see our counseling room
+                </button>
+              </div>
+              
+              {showCounselingRoom && (
+                <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+                  <div className="bg-white rounded-lg max-w-4xl w-full p-4">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-2xl font-bold">Our Counseling Room</h3>
+                      <button
+                        onClick={() => setShowCounselingRoom(false)}
+                        className="text-gray-500 hover:text-gray-700"
+                      >
+                        <X size={24} />
+                      </button>
+                    </div>
+                    <div className="flex gap-4 overflow-x-auto pb-4">
+                      <img
+                        src="https://i.imgur.com/W1w7Z4j.jpg"
+                        alt="Counseling Room 1"
+                        className="w-full h-96 object-cover rounded-lg"
+                      />
+                      <img
+                        src="https://i.imgur.com/6lDw8Nl.jpg"
+                        alt="Counseling Room 2"
+                        className="w-full h-96 object-cover rounded-lg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div className="relative">
                 <div className="flex overflow-x-auto pb-8 gap-4 snap-x snap-mandatory scrollbar-hide">
                   {[
@@ -486,7 +524,7 @@ function App() {
                     </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>Ruiru Way Bridge Opp Ruiru Golf Club Ground Floor, Room 4</p>
+                      <p>Ruiru Way Bridge Opp Ruiru Golf Club Ground Floor 4, Room 4</p>
                     </div>
                     <p className="ml-9">P.O. Box: 64069-00620, Muthaiga</p>
                   </div>
@@ -563,13 +601,13 @@ function App() {
               <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
               <div className="space-y-3 text-gray-400">
                 <div className="flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-coral-500" />
+                  <Mail className="w-5 h-5 text -coral-500" />
                   <p>oasiswellness2020@gmail.com</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-coral-500" />
                   <div>
-                    <p>Ruiru Way Bridge Opp Ruiru Golf Club Ground Floor, Room 4</p>
+                    <p>Ruiru Way Bridge Opp Ruiru Golf Club Ground Floor 4, Room 4</p>
                     <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
                   </div>
                 </div>
