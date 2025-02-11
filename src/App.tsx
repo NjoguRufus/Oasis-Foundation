@@ -12,7 +12,7 @@ function Logo() {
         </div>
         <div className="flex items-center gap-2 mt-1">
           <div className="h-px bg-coral-500 w-12"></div>
-          <p className="text-sm md:text-base text-teal-400 italic">we care</p>
+          <p className="text-sm md:text-base text-teal-500 italic">we care</p>
           <div className="h-px bg-coral-500 w-12"></div>
         </div>
       </div>
