@@ -491,7 +491,7 @@ function App() {
                     "https://i.imgur.com/ArBmc2P.jpg",
                     "https://i.imgur.com/u30q5RP.jpg",
                     "https://i.imgur.com/p1BerMb.jpg",
-                    "https://i.imgur.com/gb17eeO.jpg",
+                    "https://i.imgur.com/hnpC6Jx.jpg",
                     "https://i.imgur.com/ZTa9vbL.jpg",
                     "https://i.imgur.com/KSP3DO4.jpg",
                     "https://i.imgur.com/oegLCYZ.jpg",
