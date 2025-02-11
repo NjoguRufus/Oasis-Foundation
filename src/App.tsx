@@ -30,11 +30,13 @@ function ImageSlideshow() {
 
     { url: "https://i.imgur.com/q3lmvYB.jpg", alt: "Oasis Wellness Event 2" },
     
+
+
     { url: "https://i.imgur.com/p1BerMb.jpg", alt: "Oasis Wellness Event 3" },
    
     { url: " https://i.imgur.com/L8nmapU.jpg", alt: "Oasis Wellness Event 4" },
-    { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Wellness Event 5" }
-    
+    { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Wellness Event 5" },
+    { url: "https://i.imgur.com/A4LFbWq.jpg", alt: "Oasis Wellness Event 6"}
 
     
   ];
