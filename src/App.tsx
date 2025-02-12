@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Phone, Mail, MapPin, Heart, Users, Brain, Sparkles, ArrowRight, MessageCircle, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 function Logo() {
   return (
@@ -60,8 +60,7 @@ function ImageSlideshow() {
   }, [isTransitioning, images.length]);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout | null = null;
-    
+    let timer: ReturnType<typeof setInterval> | null = null;
     if (!isTransitioning) {
       timer = setInterval(() => {
         setDirection('right');
