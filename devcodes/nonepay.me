@@ -1,0 +1,79 @@
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+
+const ErrorScreen = () => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Set canvas size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Matrix effect variables
+    const chars = "01 ERROR SYSTEM FAILURE REBOOT * # @ ! & %".split("");
+    const fontSize = 20; // Bigger font size for better effect
+    const columns = canvas.width / fontSize;
+    const drops: number[] = Array(Math.floor(columns)).fill(1);
+
+    const draw = () => {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#ff0000"; // Red color
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    };
+
+    const interval = setInterval(draw, 50);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative flex items-center justify-center h-screen w-full bg-black overflow-hidden">
+      {/* Matrix Effect Background */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full"></canvas>
+
+      {/* Dark Overlay for Readability */}
+      <div className="absolute inset-0 bg-black opacity-60"></div>
+
+      {/* Main Error Message with Flashing Effect */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 text-center text-red-500"
+      >
+        <h1 className="text-5xl md:text-8xl font-extrabold tracking-widest animate-pulse">
+          ⚠ ERROR 909 ⚠
+        </h1>
+        <p className="mt-4 text-3xl md:text-5xl font-mono animate-pulse">
+          OASIS WELLNESS FOUNDATION HAS NOT BEEN PAID.
+        </p>
+        <p className="mt-2 text-2xl md:text-4xl animate-pulse">
+          CONTACT <span className="text-white">DEVELOPER</span> FOR ACTIVATION.
+        </p>
+        <p className="mt-6 text-xl md:text-3xl text-gray-300 tracking-widest animate-pulse">
+          SYSTEM LOCKDOWN INITIATED...
+        </p>
+      </motion.div>
+    </div>
+  );
+};
+
+export default ErrorScreen;
