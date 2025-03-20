@@ -600,38 +600,47 @@ function App() {
       </div>
 
       <footer className="bg-gray-900 text-white rounded-t-[2.5rem]">
-        <div className="max-w-6xl mx-auto px-4 py-12">
-          <div className="grid md:grid-cols-2 gap-8">
+  <div className="max-w-6xl mx-auto px-4 py-8"> {/* Reduced py-12 to py-8 */}
+    <div className="grid md:grid-cols-2 gap-6"> {/* Reduced gap-8 to gap-6 */}
+      <div>
+        {/* Organization Logo */}
+        <Logo />
+        <p className="text-gray-400 mt-2 text-sm">Providing hope and healing for those struggling with addiction.</p> {/* Reduced mt-4 to mt-2 and text size */}
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold mb-2">Contact Information</h3> {/* Reduced text-xl to text-lg and mb-4 to mb-2 */}
+        <div className="space-y-2 text-gray-400 text-sm"> {/* Reduced space-y-3 to space-y-2 and text size */}
+          <div className="flex items-center gap-2">
+            <Mail className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
+            <p>oasiswellness2020@gmail.com</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
             <div>
-              <Logo />
-              <p className="text-gray-400 mt-4">Providing hope and healing for those struggling with addiction.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
-              <div className="space-y-3 text-gray-400">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-5 h-5 text -coral-500" />
-                  <p>oasiswellness2020@gmail.com</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-coral-500" />
-                  <div>
-                    <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
-                    <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="w-5 h-5 text-coral-500" />
-                  <p>24/7 Helpline: +254 712 929 460</p>
-                </div>
-              </div>
+              <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
+              <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Oasis Wellness Foundation. All rights reserved.</p>
+          <div className="flex items-center gap-2">
+            <Phone className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
+            <p>24/7 Helpline: +254 712 929 460</p>
           </div>
         </div>
-      </footer>
+      </div>
+    </div>
+    <div className="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400 text-sm"> {/* Reduced mt-8 to mt-6, pt-8 to pt-6, and text size */}
+      <p>&copy; {new Date().getFullYear()} Oasis Wellness Foundation. All rights reserved.</p>
+      {/* Developer Credit with Logo and Website URL */}
+      <div className="mt-3 text-xs flex items-center justify-center gap-2"> {/* Reduced mt-4 to mt-3 and text size */}
+        <span>Developed and Maintained by</span>
+        <a href="https://astraronix.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-coral-500 hover:underline">
+          <img src="https://i.imgur.com/T7mH4Ly.png" alt="Astraronix Solutions Logo" className="h-5" /> {/* Reduced logo size */}
+          <span>Astraronix Solutions</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
     </div>
   );
 }
