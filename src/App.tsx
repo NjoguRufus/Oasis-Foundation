@@ -321,7 +321,7 @@ function App() {
                 <div>
                   <h3 className="text-2xl font-semibold mb-4 text-teal-400">Our Story</h3>
                   <p className="text-gray-600 mb-6">
-                    Oasis Wellness Foundation was established in 2020 after recognizing the urgent need to support individuals struggling with drug and substance disorders. Many were willing to recover but lacked the necessary support system.
+                    Oasis Wellness Foundation was established in 2021 after recognizing the urgent need to support individuals struggling with drug and substance disorders and non-communicable diseases (NCDs). Many were willing to recover but lacked the necessary support system.
                   </p>
                   <p className="text-gray-600">
                     Our organization is dedicated to providing both inpatient and outpatient care, guiding individuals—both male and female—on their journey to recovery. Through a compassionate and structured approach, we strive to empower individuals to regain control of their lives and achieve lasting wellness.
@@ -398,7 +398,7 @@ function App() {
           <section id="services" className="py-20 px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Our Services</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
                 {[
                   { 
                     icon: <img src="https://i.imgur.com/4nbFFCV.png" alt="Prevention Icon" className="w-12 h-12" />, 
@@ -419,6 +419,11 @@ function App() {
                     icon: <Users className="w-12 h-12 text-teal-400" />, 
                     title: 'After Care Program', 
                     description: 'AA meetings and follow ups' 
+                  },
+                  { 
+                    icon: <img src="/images/ncd.png" alt="NCD Prevention Icon" className="w-12 h-12" />, 
+                    title: 'NCD Prevention', 
+                    description: 'Comprehensive prevention and management of non-communicable diseases' 
                   }
                 ].map((service, index) => (
                   <div key={index} className="bg-white p-6 rounded-lg shadow-lg text-center hover:transform hover:scale-105 transition duration-300">
@@ -427,6 +432,80 @@ function App() {
                     <p className="text-gray-600">{service.description}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="py-20 px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">NCD Prevention & Partnerships</h2>
+              <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                  <h3 className="text-2xl font-semibold mb-4 text-teal-400">Non-Communicable Disease Prevention</h3>
+                  <p className="text-gray-600 mb-6">
+                    Beyond addiction treatment, we are committed to preventing and managing non-communicable diseases (NCDs) such as diabetes, cardiovascular diseases, cancer, and chronic respiratory diseases. Our comprehensive approach includes:
+                  </p>
+                  <ul className="text-gray-600 space-y-2">
+                    <li className="flex items-start">
+                      <span className="text-coral-500 mr-2">•</span>
+                      Health education and awareness programs
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-coral-500 mr-2">•</span>
+                      Lifestyle modification counseling
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-coral-500 mr-2">•</span>
+                      Early detection and screening initiatives
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-coral-500 mr-2">•</span>
+                      Community-based prevention strategies
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <img 
+                    src="https://i.imgur.com/EVjvCqE.jpg" 
+                    alt="NCD prevention and health awareness" 
+                    className="rounded-lg shadow-lg w-full h-[400px] object-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="text-center">
+                <h3 className="text-3xl font-semibold mb-8 text-gray-800">Our Strategic Partnerships</h3>
+                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                  <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
+                    <div className="flex justify-center mb-4">
+                      <img 
+                        src="/images/moh.png" 
+                        alt="Ministry of Health Kenya Logo" 
+                        className="w-24 h-24 object-contain"
+                      />
+                    </div>
+                    <h4 className="text-xl font-semibold mb-3 text-teal-600">Ministry of Health Kenya</h4>
+                    <p className="text-gray-600">
+                      Partnering with the Ministry of Health to implement national health policies, 
+                      coordinate NCD prevention programs, and ensure quality healthcare delivery across Kenya.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
+                    <div className="flex justify-center mb-4">
+                      <img 
+                        src="/images/ncd.png" 
+                        alt="NCD Alliance Kenya Logo" 
+                        className="w-24 h-24 object-contain"
+                      />
+                    </div>
+                    <h4 className="text-xl font-semibold mb-3 text-coral-600">NCD Alliance Kenya</h4>
+                    <p className="text-gray-600">
+                      Collaborating with NCD Alliance Kenya to strengthen advocacy, 
+                      build capacity, and implement evidence-based NCD prevention and control strategies.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -527,10 +606,10 @@ function App() {
                       <Phone className="w-6 h-6 text-coral-500 mr-3" />
                       <p>+254 712 929 460 / +254 711 389 345</p>
                     </div>
-                    <div className="flex items-center">
-                      <Mail className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>oasiswellness2020@gmail.com</p>
-                    </div>
+                                      <div className="flex items-center">
+                    <Mail className="w-6 h-6 text-coral-500 mr-3" />
+                    <p>oasiswellness2021@gmail.com</p>
+                  </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
                       <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
@@ -605,14 +684,14 @@ function App() {
       <div>
         {/* Organization Logo */}
         <Logo />
-        <p className="text-gray-400 mt-2 text-sm">Providing hope and healing for those struggling with addiction.</p> {/* Reduced mt-4 to mt-2 and text size */}
+        <p className="text-gray-400 mt-2 text-sm">Providing hope and healing for those struggling with addiction and non-communicable diseases.</p> {/* Reduced mt-4 to mt-2 and text size */}
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-2">Contact Information</h3> {/* Reduced text-xl to text-lg and mb-4 to mb-2 */}
         <div className="space-y-2 text-gray-400 text-sm"> {/* Reduced space-y-3 to space-y-2 and text size */}
           <div className="flex items-center gap-2">
             <Mail className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
-            <p>oasiswellness2020@gmail.com</p>
+            <p>oasiswellness2021@gmail.com</p>
           </div>
           <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
