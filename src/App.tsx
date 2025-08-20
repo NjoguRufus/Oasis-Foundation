@@ -481,7 +481,7 @@ function App() {
                       <img 
                         src="/images/moh.png" 
                         alt="Ministry of Health Kenya Logo" 
-                        className="w-24 h-24 object-contain"
+                        className="w-24 h-24 object-contain transform scale-150"
                       />
                     </div>
                     <h4 className="text-xl font-semibold mb-3 text-teal-600">Ministry of Health Kenya</h4>
@@ -494,9 +494,9 @@ function App() {
                   <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
                     <div className="flex justify-center mb-4">
                       <img 
-                        src="/images/ncd.png" 
+                        src="/images/ncd1.png" 
                         alt="NCD Alliance Kenya Logo" 
-                        className="w-24 h-24 object-contain"
+                        className="w-24 h-24 object-contain transform scale-150"
                       />
                     </div>
                     <h4 className="text-xl font-semibold mb-3 text-coral-600">NCD Alliance Kenya</h4>
