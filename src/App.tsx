@@ -714,7 +714,7 @@ function App() {
                   </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>Thika rd. Kahawa sukari avenue next to kahawa sukari mall group floor room 3.</p>
+                      <p>Thika rd. Kahawa sukari avenue next to kahawa sukari mall ground floor room 3.</p>
                     </div>
                     <p className="ml-9">P.O. Box: 64069-00620, Muthaiga</p>
                   </div>
@@ -798,7 +798,7 @@ function App() {
           <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
             <div>
-              <p>Thika rd. Kahawa sukari avenue next to kahawa sukari mall group floor room 3.</p>
+              <p>Thika rd. Kahawa sukari avenue next to kahawa sukari mall ground floor room 3.</p>
               <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
             </div>
           </div>
