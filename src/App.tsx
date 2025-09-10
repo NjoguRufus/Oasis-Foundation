@@ -27,18 +27,11 @@ function ImageSlideshow() {
 
   const images = [
     { url: "https://i.imgur.com/iIc6xs5.jpg", alt: "Oasis Wellness Event 1" },
-
     { url: "https://i.imgur.com/q3lmvYB.jpg", alt: "Oasis Wellness Event 2" },
-    
-
-
     { url: "https://i.imgur.com/p1BerMb.jpg", alt: "Oasis Wellness Event 3" },
-   
     { url: " https://i.imgur.com/L8nmapU.jpg", alt: "Oasis Wellness Event 4" },
     { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Wellness Event 5" },
     { url: "https://i.imgur.com/0Q1DGfU.jpg", alt: "Oasis Wellness Event 6"}
-
-    
   ];
 
   const nextSlide = useCallback(() => {
@@ -168,12 +161,36 @@ function ImageSlideshow() {
   );
 }
 
+function PaymentModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg max-w-md w-full p-6">
+        <div className="text-center">
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Notice</h3>
+          <p className="text-gray-600 mb-6">
+            All changes will be applied when the website is fully paid.
+          </p>
+          <button
+            onClick={onClose}
+            className="bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300"
+          >
+            Okay
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showCounselingRoom, setShowCounselingRoom] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -209,6 +226,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
+      <PaymentModal 
+        isOpen={showPaymentModal} 
+        onClose={() => setShowPaymentModal(false)} 
+      />
+      
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
@@ -340,7 +362,7 @@ function App() {
                     <img 
                       src="https://i.imgur.com/EVjvCqE.jpg" 
                       alt="Helping those affected by addiction" 
-                      className="rounded-lg shadow-lg w-full h-[400px] object-cover"
+                    className="rounded-lg shadow-lg w-full h-[400px] object-cover"
                     />
                   </div>
                   <div>
@@ -479,7 +501,6 @@ function App() {
                     "https://i.imgur.com/3dltxcb.jpg",
                     "https://i.imgur.com/nbqfHii.jpg",
                     "https://i.imgur.com/97589Gj.jpg",
-                  
                     "https://i.imgur.com/L8nmapU.jpg",
                     "https://i.imgur.com/ofDzZFZ.jpg",
                     "https://i.imgur.com/qg2eJzU.jpg",
@@ -533,7 +554,7 @@ function App() {
                     </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
+                      <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
                     </div>
                     <p className="ml-9">P.O. Box: 64069-00620, Muthaiga</p>
                   </div>
@@ -600,47 +621,45 @@ function App() {
       </div>
 
       <footer className="bg-gray-900 text-white rounded-t-[2.5rem]">
-  <div className="max-w-6xl mx-auto px-4 py-8"> {/* Reduced py-12 to py-8 */}
-    <div className="grid md:grid-cols-2 gap-6"> {/* Reduced gap-8 to gap-6 */}
-      <div>
-        {/* Organization Logo */}
-        <Logo />
-        <p className="text-gray-400 mt-2 text-sm">Providing hope and healing for those struggling with addiction.</p> {/* Reduced mt-4 to mt-2 and text size */}
-      </div>
-      <div>
-        <h3 className="text-lg font-semibold mb-2">Contact Information</h3> {/* Reduced text-xl to text-lg and mb-4 to mb-2 */}
-        <div className="space-y-2 text-gray-400 text-sm"> {/* Reduced space-y-3 to space-y-2 and text size */}
-          <div className="flex items-center gap-2">
-            <Mail className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
-            <p>oasiswellness2020@gmail.com</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
-              <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
+              <Logo />
+              <p className="text-gray-400 mt-2 text-sm">Providing hope and healing for those struggling with addiction.</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Contact Information</h3>
+              <div className="space-y-2 text-gray-400 text-sm">
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-coral-500" />
+                  <p>oasiswellness2020@gmail.com</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-coral-500" />
+                  <div>
+                    <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
+                    <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-coral-500" />
+                  <p>24/7 Helpline: +254 712 929 460</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Phone className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
-            <p>24/7 Helpline: +254 712 929 460</p>
+          <div className="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400 text-sm">
+            <p>&copy; {new Date().getFullYear()} Oasis Wellness Foundation. All rights reserved.</p>
+            <div className="mt-3 text-xs flex items-center justify-center gap-2">
+              <span>Developed and Maintained by</span>
+              <a href="https://astraronix.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-coral-500 hover:underline">
+                <img src="https://i.imgur.com/T7mH4Ly.png" alt="Astraronix Solutions Logo" className="h-5" />
+                <span>Astraronix Solutions</span>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div className="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400 text-sm"> {/* Reduced mt-8 to mt-6, pt-8 to pt-6, and text size */}
-      <p>&copy; {new Date().getFullYear()} Oasis Wellness Foundation. All rights reserved.</p>
-      {/* Developer Credit with Logo and Website URL */}
-      <div className="mt-3 text-xs flex items-center justify-center gap-2"> {/* Reduced mt-4 to mt-3 and text size */}
-        <span>Developed and Maintained by</span>
-        <a href="https://astraronix.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-coral-500 hover:underline">
-          <img src="https://i.imgur.com/T7mH4Ly.png" alt="Astraronix Solutions Logo" className="h-5" /> {/* Reduced logo size */}
-          <span>Astraronix Solutions</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</footer>
+      </footer>
     </div>
   );
 }
