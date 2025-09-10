@@ -321,7 +321,7 @@ function App() {
                 <div>
                   <h3 className="text-2xl font-semibold mb-4 text-teal-400">Our Story</h3>
                   <p className="text-gray-600 mb-6">
-                    Oasis Wellness Foundation was established in 2021 after recognizing the urgent need to support individuals struggling with drug and substance disorders and non-communicable diseases (NCDs). Many were willing to recover but lacked the necessary support system.
+                    Oasis Wellness Foundation was established in 2020 after recognizing the urgent need to support individuals struggling with drug and substance disorders. Many were willing to recover but lacked the necessary support system.
                   </p>
                   <p className="text-gray-600">
                     Our organization is dedicated to providing both inpatient and outpatient care, guiding individuals—both male and female—on their journey to recovery. Through a compassionate and structured approach, we strive to empower individuals to regain control of their lives and achieve lasting wellness.
@@ -398,13 +398,8 @@ function App() {
           <section id="services" className="py-20 px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Our Services</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
-                  { 
-                    icon: <img src="/images/ncd.png" alt="NCD Prevention Icon" className="w-12 h-12" />, 
-                    title: 'NCD Prevention', 
-                    description: 'Comprehensive prevention and management of non-communicable diseases' 
-                  },
                   { 
                     icon: <img src="https://i.imgur.com/4nbFFCV.png" alt="Prevention Icon" className="w-12 h-12" />, 
                     title: 'Addiction Prevention', 
@@ -432,182 +427,6 @@ function App() {
                     <p className="text-gray-600">{service.description}</p>
                   </div>
                 ))}
-              </div>
-              
-              {/* NCD Prevention Detailed Section */}
-              <div className="mt-16 bg-gradient-to-r from-teal-50 to-coral-50 p-8 rounded-2xl shadow-lg">
-                <div className="text-center mb-8">
-                  <h3 className="text-3xl font-bold text-gray-800 mb-4">NCD Prevention: Our Primary Focus</h3>
-                  <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-                    At Oasis Wellness Foundation, we recognize that Non-Communicable Diseases (NCDs) represent one of the greatest health challenges of our time. 
-                    Our NCD Prevention program stands as our flagship service, addressing the critical need for early intervention and comprehensive health management.
-                  </p>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-8 mb-8">
-                  <div>
-                    <h4 className="text-xl font-semibold text-teal-600 mb-4">What We Do</h4>
-                    <ul className="space-y-3 text-gray-700">
-                      <li className="flex items-start">
-                        <span className="text-coral-500 mr-3 text-lg">•</span>
-                        <span>Comprehensive health screenings and risk assessments</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-coral-500 mr-3 text-lg">•</span>
-                        <span>Lifestyle modification counseling and support</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-coral-500 mr-3 text-lg">•</span>
-                        <span>Nutrition and physical activity guidance</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-coral-500 mr-3 text-lg">•</span>
-                        <span>Chronic disease management and monitoring</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="text-coral-500 mr-3 text-lg">•</span>
-                        <span>Community education and awareness programs</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold text-coral-600 mb-4">Why NCD Prevention First?</h4>
-                    <p className="text-gray-700 mb-4">
-                      NCDs like diabetes, cardiovascular diseases, cancer, and chronic respiratory conditions are responsible for over 70% of global deaths. 
-                      In Kenya, these diseases are on the rise, affecting individuals and families across all socioeconomic levels.
-                    </p>
-                    <p className="text-gray-700">
-                      By prioritizing NCD prevention, we're not just treating symptoms—we're building healthier communities and preventing the devastating 
-                      impact of these diseases before they take hold.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="text-center">
-                  <h4 className="text-2xl font-semibold text-gray-800 mb-6">Working Together for Better Health</h4>
-                  <p className="text-lg text-gray-600 mb-8 max-w-4xl mx-auto">
-                    Our success in NCD prevention is built on strong partnerships with leading health organizations. 
-                    We believe that collaboration is key to creating lasting health impact across Kenya.
-                  </p>
-                  
-                  <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-teal-500">
-                      <div className="flex items-center mb-4">
-                        <img 
-                          src="/images/moh.png" 
-                          alt="Ministry of Health Kenya Logo" 
-                          className="w-16 h-16 object-contain mr-4"
-                        />
-                        <h5 className="text-xl font-semibold text-teal-600">Ministry of Health Kenya</h5>
-                      </div>
-                      <p className="text-gray-700 text-sm leading-relaxed">
-                        "Our partnership with the Ministry of Health Kenya enables us to align with national health priorities, 
-                        implement evidence-based prevention strategies, and contribute to Kenya's vision of universal health coverage. 
-                        Together, we're working to reduce NCD prevalence and improve health outcomes across the country."
-                      </p>
-                    </div>
-                    
-                    <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-coral-500">
-                      <div className="flex items-center mb-4">
-                        <img 
-                          src="/images/ncd1.png" 
-                          alt="NCD Alliance Kenya Logo" 
-                          className="w-16 h-16 object-contain mr-4"
-                        />
-                        <h5 className="text-xl font-semibold text-coral-600">NCD Alliance Kenya</h5>
-                      </div>
-                      <p className="text-gray-700 text-sm leading-relaxed">
-                        "Through our collaboration with NCD Alliance Kenya, we're strengthening our advocacy efforts, 
-                        building capacity for NCD prevention, and implementing proven strategies that save lives. 
-                        This partnership amplifies our impact and ensures we're at the forefront of NCD prevention innovation."
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-8 p-6 bg-white rounded-xl shadow-md max-w-3xl mx-auto">
-                    <h5 className="text-lg font-semibold text-gray-800 mb-3">Additional Strategic Partners</h5>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      We also collaborate with county health departments, local healthcare facilities, educational institutions, 
-                      and community-based organizations to create a comprehensive network of NCD prevention services. 
-                      Our partnerships extend beyond traditional healthcare to include schools, workplaces, and faith-based organizations, 
-                      ensuring that NCD prevention reaches every corner of our communities.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="py-20 px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">NCD Prevention & Partnerships</h2>
-              <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-                <div>
-                  <h3 className="text-2xl font-semibold mb-4 text-teal-400">Non-Communicable Disease Prevention</h3>
-                  <p className="text-gray-600 mb-6">
-                    Beyond addiction treatment, we are committed to preventing and managing non-communicable diseases (NCDs) such as diabetes, cardiovascular diseases, cancer, and chronic respiratory diseases. Our comprehensive approach includes:
-                  </p>
-                  <ul className="text-gray-600 space-y-2">
-                    <li className="flex items-start">
-                      <span className="text-coral-500 mr-2">•</span>
-                      Health education and awareness programs
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-coral-500 mr-2">•</span>
-                      Lifestyle modification counseling
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-coral-500 mr-2">•</span>
-                      Early detection and screening initiatives
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-coral-500 mr-2">•</span>
-                      Community-based prevention strategies
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <img 
-                    src="https://i.imgur.com/EVjvCqE.jpg" 
-                    alt="NCD prevention and health awareness" 
-                    className="rounded-lg shadow-lg w-full h-[400px] object-cover"
-                  />
-                </div>
-              </div>
-
-              <div className="text-center">
-                <h3 className="text-3xl font-semibold mb-8 text-gray-800">Our Strategic Partnerships</h3>
-                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                  <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
-                    <div className="flex justify-center mb-4">
-                      <img 
-                        src="/images/moh.png" 
-                        alt="Ministry of Health Kenya Logo" 
-                        className="w-24 h-24 object-contain transform scale-150"
-                      />
-                    </div>
-                    <h4 className="text-xl font-semibold mb-3 text-teal-600">Ministry of Health Kenya</h4>
-                    <p className="text-gray-600">
-                      Partnering with the Ministry of Health to implement national health policies, 
-                      coordinate NCD prevention programs, and ensure quality healthcare delivery across Kenya.
-                    </p>
-                  </div>
-                  
-                  <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
-                    <div className="flex justify-center mb-4">
-                      <img 
-                        src="/images/ncd1.png" 
-                        alt="NCD Alliance Kenya Logo" 
-                        className="w-24 h-24 object-contain transform scale-150"
-                      />
-                    </div>
-                    <h4 className="text-xl font-semibold mb-3 text-coral-600">NCD Alliance Kenya</h4>
-                    <p className="text-gray-600">
-                      Collaborating with NCD Alliance Kenya to strengthen advocacy, 
-                      build capacity, and implement evidence-based NCD prevention and control strategies.
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </section>
@@ -708,13 +527,13 @@ function App() {
                       <Phone className="w-6 h-6 text-coral-500 mr-3" />
                       <p>+254 712 929 460 / +254 711 389 345</p>
                     </div>
-                                      <div className="flex items-center">
-                    <Mail className="w-6 h-6 text-coral-500 mr-3" />
-                    <p>oasiswellness2021@gmail.com</p>
-                  </div>
+                    <div className="flex items-center">
+                      <Mail className="w-6 h-6 text-coral-500 mr-3" />
+                      <p>oasiswellness2020@gmail.com</p>
+                    </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>Thika rd. Kahawa sukari avenue next to kahawa sukari mall ground floor room 3.</p>
+                      <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
                     </div>
                     <p className="ml-9">P.O. Box: 64069-00620, Muthaiga</p>
                   </div>
@@ -786,19 +605,19 @@ function App() {
       <div>
         {/* Organization Logo */}
         <Logo />
-        <p className="text-gray-400 mt-2 text-sm">Providing hope and healing for those struggling with addiction and non-communicable diseases.</p> {/* Reduced mt-4 to mt-2 and text size */}
+        <p className="text-gray-400 mt-2 text-sm">Providing hope and healing for those struggling with addiction.</p> {/* Reduced mt-4 to mt-2 and text size */}
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-2">Contact Information</h3> {/* Reduced text-xl to text-lg and mb-4 to mb-2 */}
         <div className="space-y-2 text-gray-400 text-sm"> {/* Reduced space-y-3 to space-y-2 and text size */}
           <div className="flex items-center gap-2">
             <Mail className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
-            <p>oasiswellness2021@gmail.com</p>
+            <p>oasiswellness2020@gmail.com</p>
           </div>
           <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 text-coral-500" /> {/* Reduced icon size */}
             <div>
-              <p>Thika rd. Kahawa sukari avenue next to kahawa sukari mall ground floor room 3.</p>
+              <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
               <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
             </div>
           </div>
