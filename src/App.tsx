@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twit
 import { useJsApiLoader, GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import NavigationModal from './components/NavigationModal';
 
-const MAP_CONTAINER_STYLE = { width: '100%', height: '100%', minHeight: '350px' };
+const MAP_CONTAINER_STYLE = { width: '100%', height: '100%', minHeight: '450px' };
 const DESTINATION = { lat: -1.1921635987964438, lng: 36.94331377496547 };
 const MAP_CENTER = DESTINATION;
 
@@ -574,7 +574,7 @@ function App() {
             </div>
           </section>
 
-          <section className="py-20 px-4 bg-white">
+          <section id="find-us" className="py-20 px-4 bg-transparent">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Find Us</h2>
               <p className="text-gray-500 text-sm text-center max-w-2xl mx-auto mb-6">
@@ -582,39 +582,7 @@ function App() {
                 When asked, please allow location access so we can draw the trail.
               </p>
 
-              <div className="flex justify-center mb-4">
-                <button
-                  type="button"
-                  onClick={handleStartTrip}
-                  disabled={!directionsResult || !googleMapsApiKey || !isMapsLoaded}
-                  className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold shadow-md transition-colors ${
-                    !directionsResult || !googleMapsApiKey || !isMapsLoaded
-                      ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
-                      : 'bg-teal-500 text-white hover:bg-teal-600'
-                  }`}
-                >
-                  <Navigation className="w-4 h-4" />
-                  {tripStarted ? 'Re-center on route' : 'Start trip on map'}
-                </button>
-              </div>
-
-              <div className="flex justify-center mb-6">
-                <button
-                  type="button"
-                  onClick={() => setIsNavigationOpen(true)}
-                  disabled={!googleMapsApiKey}
-                  className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold shadow-md transition-colors ${
-                    !googleMapsApiKey
-                      ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
-                      : 'bg-gray-900 text-white hover:bg-black'
-                  }`}
-                >
-                  <Navigation className="w-4 h-4" />
-                  Start live walking navigation
-                </button>
-              </div>
-
-              <div className="rounded-xl overflow-hidden shadow-lg max-w-4xl mx-auto" style={{ minHeight: 350 }}>
+              <div className="rounded-xl overflow-hidden shadow-lg max-w-5xl mx-auto" style={{ minHeight: 450 }}>
                 {!googleMapsApiKey ? (
                   <>
                     <iframe
@@ -708,8 +676,14 @@ function App() {
                       if (!leg) return null;
                       return (
                         <p>
-                          Trip summary: <span className="font-semibold text-gray-500">{leg.distance?.text}</span> ·{' '}
-                          <span className="font-semibold text-gray-500">{leg.duration?.text}</span>
+                          Trip summary:{" "}
+                          <span className="font-semibold text-gray-500">
+                            {leg.distance?.text}
+                          </span>{" "}
+                          ·{" "}
+                          <span className="font-semibold text-gray-500">
+                            {leg.duration?.text}
+                          </span>
                         </p>
                       );
                     })()
@@ -719,6 +693,22 @@ function App() {
                   </p>
                 </div>
               )}
+
+              <div className="flex justify-center mt-6">
+                <button
+                  type="button"
+                  onClick={() => setIsNavigationOpen(true)}
+                  disabled={!googleMapsApiKey}
+                  className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold shadow-md transition-colors ${
+                    !googleMapsApiKey
+                      ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                      : 'bg-gray-900 text-white hover:bg-black'
+                  }`}
+                >
+                  <Navigation className="w-4 h-4" />
+                  Start live walking navigation
+                </button>
+              </div>
             </div>
           </section>
 
@@ -739,7 +729,12 @@ function App() {
                     </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
+                      <a
+                        href="#find-us"
+                        className="text-left text-gray-700 hover:text-teal-400 transition-colors"
+                      >
+                        Kahawa Sukari
+                      </a>
                     </div>
                     <p className="ml-9">P.O. Box: 64069-00620, Muthaiga</p>
                   </div>
@@ -822,7 +817,12 @@ function App() {
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-coral-500" />
                   <div>
-                    <p>Ruiru waybridge opp golf club, ground floor, room 4.</p>
+                    <a
+                      href="#find-us"
+                      className="hover:text-teal-400 transition-colors"
+                    >
+                      Kahawa Sukari
+                    </a>
                     <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
                   </div>
                 </div>

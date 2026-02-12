@@ -43,8 +43,13 @@ export const NavigationMap: React.FC<NavigationMapProps> = ({
       }}
       mapContainerStyle={MAP_CONTAINER_STYLE}
       options={{
-        disableDefaultUI: true,
+        disableDefaultUI: false,
         zoomControl: true,
+        mapTypeControl: true,
+        streetViewControl: true,
+        rotateControl: true,
+        fullscreenControl: true,
+        scaleControl: true,
         gestureHandling: GESTURE_HANDLING,
         zoom: 18,
       }}
