@@ -249,6 +249,27 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  const handleOpenNavigation = useCallback(() => {
+    if (!googleMapsApiKey) return;
+    window.location.hash = 'live-nav';
+    setIsNavigationOpen(true);
+  }, [googleMapsApiKey]);
+
+  const handleCloseNavigation = useCallback(() => {
+    setIsNavigationOpen(false);
+    window.location.hash = 'find-us';
+  }, []);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      if (window.location.hash !== '#live-nav' && isNavigationOpen) {
+        setIsNavigationOpen(false);
+      }
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, [isNavigationOpen]);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
@@ -697,7 +718,7 @@ function App() {
               <div className="flex justify-center mt-6">
                 <button
                   type="button"
-                  onClick={() => setIsNavigationOpen(true)}
+                  onClick={handleOpenNavigation}
                   disabled={!googleMapsApiKey}
                   className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold shadow-md transition-colors ${
                     !googleMapsApiKey
@@ -849,7 +870,7 @@ function App() {
         <NavigationModal
           destination={DESTINATION}
           isOpen={isNavigationOpen}
-          onClose={() => setIsNavigationOpen(false)}
+          onClose={handleCloseNavigation}
           apiKey={googleMapsApiKey}
           isLoaded={isMapsLoaded}
           loadError={mapsLoadError}
