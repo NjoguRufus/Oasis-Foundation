@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight, Navigation } from 'lucide-react';
 import { useJsApiLoader, GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import NavigationModal from './components/NavigationModal';
 
 const MAP_CONTAINER_STYLE = { width: '100%', height: '100%', minHeight: '350px' };
 const DESTINATION = { lat: -1.1921635987964438, lng: 36.94331377496547 };
@@ -175,6 +176,10 @@ function App() {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [directionsResult, setDirectionsResult] = useState<google.maps.DirectionsResult | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [tripStarted, setTripStarted] = useState(false);
+  const [isNavigationOpen, setIsNavigationOpen] = useState(false);
+
+  const mapRef = useRef<google.maps.Map | null>(null);
 
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined;
   const { isLoaded: isMapsLoaded, loadError: mapsLoadError } = useJsApiLoader({
@@ -207,6 +212,24 @@ function App() {
       () => setLocationError('Could not get your location. Please allow location access or use the link below.')
     );
   }, [isMapsLoaded, googleMapsApiKey]);
+
+  const handleMapLoad = useCallback((map: google.maps.Map) => {
+    mapRef.current = map;
+  }, []);
+
+  const handleStartTrip = useCallback(() => {
+    if (!directionsResult || !mapRef.current) return;
+    const route = directionsResult.routes[0];
+    if (!route) return;
+
+    const bounds = new google.maps.LatLngBounds();
+    route.legs.forEach((leg) => {
+      bounds.extend(leg.start_location);
+      bounds.extend(leg.end_location);
+    });
+    mapRef.current.fitBounds(bounds);
+    setTripStarted(true);
+  }, [directionsResult]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -559,6 +582,38 @@ function App() {
                 When asked, please allow location access so we can draw the trail.
               </p>
 
+              <div className="flex justify-center mb-4">
+                <button
+                  type="button"
+                  onClick={handleStartTrip}
+                  disabled={!directionsResult || !googleMapsApiKey || !isMapsLoaded}
+                  className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold shadow-md transition-colors ${
+                    !directionsResult || !googleMapsApiKey || !isMapsLoaded
+                      ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                      : 'bg-teal-500 text-white hover:bg-teal-600'
+                  }`}
+                >
+                  <Navigation className="w-4 h-4" />
+                  {tripStarted ? 'Re-center on route' : 'Start trip on map'}
+                </button>
+              </div>
+
+              <div className="flex justify-center mb-6">
+                <button
+                  type="button"
+                  onClick={() => setIsNavigationOpen(true)}
+                  disabled={!googleMapsApiKey}
+                  className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold shadow-md transition-colors ${
+                    !googleMapsApiKey
+                      ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                      : 'bg-gray-900 text-white hover:bg-black'
+                  }`}
+                >
+                  <Navigation className="w-4 h-4" />
+                  Start live walking navigation
+                </button>
+              </div>
+
               <div className="rounded-xl overflow-hidden shadow-lg max-w-4xl mx-auto" style={{ minHeight: 350 }}>
                 {!googleMapsApiKey ? (
                   <>
@@ -624,6 +679,7 @@ function App() {
                   <GoogleMap
                     mapContainerStyle={MAP_CONTAINER_STYLE}
                     options={mapOptions}
+                    onLoad={handleMapLoad}
                   >
                     {userLocation && !directionsResult && (
                       <DirectionsService
@@ -645,9 +701,23 @@ function App() {
               </div>
 
               {googleMapsApiKey && isMapsLoaded && (
-                <p className="text-gray-400 text-xs text-center mt-3">
-                  If the route doesn&apos;t appear, try refreshing the page or use the button above to open Google Maps.
-                </p>
+                <div className="text-center mt-3 text-xs text-gray-400 space-y-1">
+                  {directionsResult && (
+                    (() => {
+                      const leg = directionsResult.routes[0]?.legs[0];
+                      if (!leg) return null;
+                      return (
+                        <p>
+                          Trip summary: <span className="font-semibold text-gray-500">{leg.distance?.text}</span> ·{' '}
+                          <span className="font-semibold text-gray-500">{leg.duration?.text}</span>
+                        </p>
+                      );
+                    })()
+                  )}
+                  <p>
+                    If the route doesn&apos;t appear, try refreshing the page or use the button above to open Google Maps.
+                  </p>
+                </div>
               )}
             </div>
           </section>
@@ -775,6 +845,16 @@ function App() {
           </div>
         </div>
       </footer>
+      {isNavigationOpen && (
+        <NavigationModal
+          destination={DESTINATION}
+          isOpen={isNavigationOpen}
+          onClose={() => setIsNavigationOpen(false)}
+          apiKey={googleMapsApiKey}
+          isLoaded={isMapsLoaded}
+          loadError={mapsLoadError}
+        />
+      )}
     </div>
   );
 }
