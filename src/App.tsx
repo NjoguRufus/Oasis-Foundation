@@ -1,12 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight, Navigation } from 'lucide-react';
+import { useJsApiLoader, GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+
+const MAP_CONTAINER_STYLE = { width: '100%', height: '100%', minHeight: '350px' };
+const DESTINATION = { lat: -1.1921635987964438, lng: 36.94331377496547 };
+const MAP_CENTER = DESTINATION;
 
 function Logo() {
   return (
     <div className="flex items-center gap-4">
-      <img src="https://i.imgur.com/xgNrrHt.png" alt="Oasis Wellness Foundation Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
+      <img src="https://i.imgur.com/xgNrrHt.png" alt="Oasis Recovery Home Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
       <div className="flex flex-col">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Oasis Wellness Foundation.</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Oasis Recovery Home</h1>
         <div className="flex flex-col">
           <p className="text-sm md:text-base text-coral-500">Addiction Prevention, Treatment, and Recovery</p>
         </div>
@@ -26,12 +31,12 @@ function ImageSlideshow() {
   const [direction, setDirection] = useState<'left' | 'right'>('right');
 
   const images = [
-    { url: "https://i.imgur.com/iIc6xs5.jpg", alt: "Oasis Wellness Event 1" },
-    { url: "https://i.imgur.com/q3lmvYB.jpg", alt: "Oasis Wellness Event 2" },
-    { url: "https://i.imgur.com/p1BerMb.jpg", alt: "Oasis Wellness Event 3" },
-    { url: " https://i.imgur.com/L8nmapU.jpg", alt: "Oasis Wellness Event 4" },
-    { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Wellness Event 5" },
-    { url: "https://i.imgur.com/0Q1DGfU.jpg", alt: "Oasis Wellness Event 6"}
+    { url: "https://i.imgur.com/iIc6xs5.jpg", alt: "Oasis Recovery Home Event 1" },
+    { url: "https://i.imgur.com/q3lmvYB.jpg", alt: "Oasis Recovery Home Event 2" },
+    { url: "https://i.imgur.com/p1BerMb.jpg", alt: "Oasis Recovery Home Event 3" },
+    { url: " https://i.imgur.com/L8nmapU.jpg", alt: "Oasis Recovery Home Event 4" },
+    { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Recovery Home Event 5" },
+    { url: "https://i.imgur.com/0Q1DGfU.jpg", alt: "Oasis Recovery Home Event 6"}
   ];
 
   const nextSlide = useCallback(() => {
@@ -161,36 +166,47 @@ function ImageSlideshow() {
   );
 }
 
-function PaymentModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg max-w-md w-full p-6">
-        <div className="text-center">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">Notice</h3>
-          <p className="text-gray-600 mb-6">
-            All changes will be applied when the website is fully paid.
-          </p>
-          <button
-            onClick={onClose}
-            className="bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300"
-          >
-            Okay
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showCounselingRoom, setShowCounselingRoom] = useState(false);
-  const [showPaymentModal, setShowPaymentModal] = useState(true);
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [directionsResult, setDirectionsResult] = useState<google.maps.DirectionsResult | null>(null);
+  const [locationError, setLocationError] = useState<string | null>(null);
+
+  const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined;
+  const { isLoaded: isMapsLoaded, loadError: mapsLoadError } = useJsApiLoader({
+    googleMapsApiKey: googleMapsApiKey || '',
+  });
+
+  const mapOptions = useMemo(
+    () => ({
+      center: MAP_CENTER,
+      zoom: 13,
+      disableDefaultUI: false,
+      zoomControl: true,
+      streetViewControl: true,
+      mapTypeControl: true,
+    }),
+    []
+  );
+
+  // Get user location once maps are loaded (for inline directions map)
+  useEffect(() => {
+    if (!isMapsLoaded || !googleMapsApiKey) return;
+
+    setLocationError(null);
+    if (!navigator.geolocation) {
+      setLocationError('Location is not supported by your browser.');
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+      () => setLocationError('Could not get your location. Please allow location access or use the link below.')
+    );
+  }, [isMapsLoaded, googleMapsApiKey]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -224,13 +240,11 @@ function App() {
     window.open(whatsappUrl, '_blank');
   };
 
+  const directionsUrl = "https://www.google.com/maps/dir/?api=1&origin=current+location&destination=-1.1921635987964438,36.94331377496547";
+  const placeEmbedUrl = "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.954678043403!2d36.94331377496547!3d-1.1921635987964438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTEnMzEuOCJTIDM2wrA1Nic0NS4yIkU!5e0!3m2!1sen!2ske!4v1770878328422!5m2!1sen!2ske";
+
   return (
     <div className="min-h-screen bg-white">
-      <PaymentModal 
-        isOpen={showPaymentModal} 
-        onClose={() => setShowPaymentModal(false)} 
-      />
-      
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
@@ -343,7 +357,7 @@ function App() {
                 <div>
                   <h3 className="text-2xl font-semibold mb-4 text-teal-400">Our Story</h3>
                   <p className="text-gray-600 mb-6">
-                    Oasis Wellness Foundation was established in 2020 after recognizing the urgent need to support individuals struggling with drug and substance disorders. Many were willing to recover but lacked the necessary support system.
+                    Oasis Recovery Home was established in 2020 after recognizing the urgent need to support individuals struggling with drug and substance disorders. Many were willing to recover but lacked the necessary support system.
                   </p>
                   <p className="text-gray-600">
                     Our organization is dedicated to providing both inpatient and outpatient care, guiding individuals—both male and female—on their journey to recovery. Through a compassionate and structured approach, we strive to empower individuals to regain control of their lives and achieve lasting wellness.
@@ -537,6 +551,107 @@ function App() {
             </div>
           </section>
 
+          <section className="py-20 px-4 bg-white">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Find Us</h2>
+              <p className="text-gray-500 text-sm text-center max-w-2xl mx-auto mb-6">
+                Use the map below to pan, zoom, and view the route from your current location to <span className="font-semibold">Oasis Recovery Home</span>.
+                When asked, please allow location access so we can draw the trail.
+              </p>
+
+              <div className="rounded-xl overflow-hidden shadow-lg max-w-4xl mx-auto" style={{ minHeight: 350 }}>
+                {!googleMapsApiKey ? (
+                  <>
+                    <iframe
+                      src={placeEmbedUrl}
+                      title="Oasis Recovery Home location"
+                      className="w-full h-full min-h-[300px]"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                    <div className="mt-3 flex flex-col items-center gap-2 pb-1">
+                      <a
+                        href={directionsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
+                      >
+                        <Navigation className="w-4 h-4" />
+                        Open directions in Google Maps
+                      </a>
+                      <p className="text-gray-400 text-xs">
+                        Add <code className="text-[0.7rem] bg-gray-100 px-1 rounded">VITE_GOOGLE_MAPS_API_KEY</code> in <code className="text-[0.7rem] bg-gray-100 px-1 rounded">.env</code> to show the live route here.
+                      </p>
+                    </div>
+                  </>
+                ) : mapsLoadError ? (
+                  <div className="flex flex-col items-center justify-center gap-4 p-6 min-h-[300px]">
+                    <p className="text-gray-600 text-center">
+                      The interactive map failed to load. You can still get directions in Google Maps.
+                    </p>
+                    <a
+                      href={directionsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
+                    >
+                      <Navigation className="w-4 h-4" />
+                      Open directions in Google Maps
+                    </a>
+                  </div>
+                ) : !isMapsLoaded ? (
+                  <div className="flex items-center justify-center min-h-[300px] text-gray-500 text-sm">
+                    Loading interactive map…
+                  </div>
+                ) : locationError ? (
+                  <div className="flex flex-col items-center justify-center gap-4 p-6 min-h-[300px]">
+                    <p className="text-gray-600 text-center">
+                      {locationError}
+                    </p>
+                    <a
+                      href={directionsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
+                    >
+                      <Navigation className="w-4 h-4" />
+                      Open directions in Google Maps
+                    </a>
+                  </div>
+                ) : (
+                  <GoogleMap
+                    mapContainerStyle={MAP_CONTAINER_STYLE}
+                    options={mapOptions}
+                  >
+                    {userLocation && !directionsResult && (
+                      <DirectionsService
+                        options={{
+                          origin: userLocation,
+                          destination: DESTINATION,
+                          travelMode: google.maps.TravelMode.DRIVING,
+                        }}
+                        callback={(result, status) => {
+                          if (status === google.maps.DirectionsStatus.OK && result) {
+                            setDirectionsResult(result);
+                          }
+                        }}
+                      />
+                    )}
+                    {directionsResult && <DirectionsRenderer directions={directionsResult} />}
+                  </GoogleMap>
+                )}
+              </div>
+
+              {googleMapsApiKey && isMapsLoaded && (
+                <p className="text-gray-400 text-xs text-center mt-3">
+                  If the route doesn&apos;t appear, try refreshing the page or use the button above to open Google Maps.
+                </p>
+              )}
+            </div>
+          </section>
+
           <section id="contact" className="py-20 px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Get Help Today</h2>
@@ -649,7 +764,7 @@ function App() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400 text-sm">
-            <p>&copy; {new Date().getFullYear()} Oasis Wellness Foundation. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Oasis Recovery Home. All rights reserved.</p>
             <div className="mt-3 text-xs flex items-center justify-center gap-2">
               <span>Developed and Maintained by</span>
               <a href="https://astraronix.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-coral-500 hover:underline">
