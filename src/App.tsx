@@ -14,7 +14,7 @@ function Logo() {
       <div className="flex flex-col">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Oasis Recovery Home</h1>
         <div className="flex flex-col">
-          <p className="text-sm md:text-base text-coral-500">Addiction Prevention, Treatment, and Recovery</p>
+          <p className="text-sm md:text-base text-coral-500">Recover With Dignity</p>
         </div>
         <div className="flex items-center gap-2 mt-1">
           <div className="h-px bg-coral-500 w-12"></div>
@@ -178,6 +178,7 @@ function App() {
   const [locationError, setLocationError] = useState<string | null>(null);
   const [tripStarted, setTripStarted] = useState(false);
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
+  const [showMaintenancePage, setShowMaintenancePage] = useState(true);
 
   const mapRef = useRef<google.maps.Map | null>(null);
 
@@ -287,6 +288,35 @@ function App() {
   const directionsUrl = "https://www.google.com/maps/dir/?api=1&origin=current+location&destination=-1.1921635987964438,36.94331377496547";
   const placeEmbedUrl = "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.954678043403!2d36.94331377496547!3d-1.1921635987964438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTEnMzEuOCJTIDM2wrA1Nic0NS4yIkU!5e0!3m2!1sen!2ske!4v1770878328422!5m2!1sen!2ske";
 
+  if (showMaintenancePage) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
+        <img
+          src="https://i.imgur.com/xgNrrHt.png"
+          alt="Oasis Recovery Home Logo"
+          className="w-24 h-24 md:w-32 md:h-32 object-contain mb-6"
+        />
+        <h1 className="text-2xl md:text-3xl font-bold text-teal-500 text-center mb-2">
+          Oasis Recovery Home
+        </h1>
+        <p className="text-coral-500 text-sm md:text-base text-center mb-8 italic">we care</p>
+        <p className="text-gray-600 text-lg md:text-xl font-semibold text-center mb-10">
+          Website under Maintenance
+        </p>
+        <p className="text-gray-500 text-sm text-center max-w-md mb-8">
+          We are updating our site to serve you better. Please check back soon.
+        </p>
+        <button
+          type="button"
+          onClick={() => setShowMaintenancePage(false)}
+          className="text-teal-500 hover:text-teal-600 text-sm font-medium underline"
+        >
+          Enter site
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
@@ -373,7 +403,7 @@ function App() {
             <div className="relative z-10 min-h-screen flex items-center justify-center pt-32">
               <div className="text-center text-white px-4">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Overcoming Addiction, One Step at a Time</h1>
-                <p className="text-lg md:text-xl lg:text-2xl mb-8 text-coral-100">Addiction Prevention, Treatment, and Recovery</p>
+                <p className="text-lg md:text-xl lg:text-2xl mb-8 text-coral-100">Recover With Dignity</p>
                 <div className="flex flex-col items-center gap-4">
                   <a 
                     href="#contact" 
