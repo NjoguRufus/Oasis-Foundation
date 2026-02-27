@@ -548,6 +548,11 @@ function App() {
               <div className="relative">
                 <div className="flex overflow-x-auto pb-8 gap-4 snap-x snap-mandatory scrollbar-hide">
                   {[
+                    "/images/new%20images/sitting%20area.png",
+                    "/images/new%20images/environment.png",
+                    "/images/new%20images/outsidetabo.png",
+                    "/images/new%20images/Bedrooms.png",
+                    "/images/new%20images/sitting%202.png",
                     "https://i.imgur.com/kRm1neK.jpg",
                     "https://i.imgur.com/z3FuBsu.jpg",
                     "https://i.imgur.com/3dltxcb.jpg",
