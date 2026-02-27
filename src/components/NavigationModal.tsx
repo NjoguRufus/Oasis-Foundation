@@ -7,6 +7,7 @@ import {
 } from "../hooks/useLiveNavigation";
 import NavigationMap from "./NavigationMap";
 import InstructionPanel from "./InstructionPanel";
+import Loader from "./Loader";
 
 export type NavigationModalProps = {
   destination: LatLng;
@@ -103,10 +104,8 @@ export const NavigationModal: React.FC<NavigationModalProps> = ({
 
       {/* Loading */}
       {apiKey && !loadError && !isLoaded && (
-        <div className="flex-1 flex items-center justify-center text-sm text-gray-700">
-          <div className="bg-white rounded-2xl shadow-lg px-4 py-3 text-center">
-            Loading map…
-          </div>
+        <div className="flex-1 flex items-center justify-center">
+          <Loader />
         </div>
       )}
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight, Navigation } from 'lucide-react';
 import { useJsApiLoader, GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import NavigationModal from './components/NavigationModal';
+import Loader from './components/Loader';
 
 const MAP_CONTAINER_STYLE = { width: '100%', height: '100%', minHeight: '450px' };
 const DESTINATION = { lat: -1.1921635987964438, lng: 36.94331377496547 };
@@ -179,8 +180,14 @@ function App() {
   const [tripStarted, setTripStarted] = useState(false);
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
   const [showMaintenancePage, setShowMaintenancePage] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   const mapRef = useRef<google.maps.Map | null>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsInitialLoad(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined;
   const { isLoaded: isMapsLoaded, loadError: mapsLoadError } = useJsApiLoader({
@@ -288,6 +295,14 @@ function App() {
   const directionsUrl =
     "https://www.google.com/maps/dir/?api=1&origin=current+location&destination=-1.1921635987964438,36.94331377496547&travelmode=walking&dir_action=navigate";
   const placeEmbedUrl = "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.954678043403!2d36.94331377496547!3d-1.1921635987964438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTEnMzEuOCJTIDM2wrA1Nic0NS4yIkU!5e0!3m2!1sen!2ske!4v1770878328422!5m2!1sen!2ske";
+
+  if (isInitialLoad) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <Loader />
+      </div>
+    );
+  }
 
   if (showMaintenancePage) {
     return (
@@ -677,8 +692,8 @@ function App() {
                     </a>
                   </div>
                 ) : !isMapsLoaded ? (
-                  <div className="flex items-center justify-center min-h-[300px] text-gray-500 text-sm">
-                    Loading interactive map…
+                  <div className="flex items-center justify-center min-h-[300px]">
+                    <Loader />
                   </div>
                 ) : locationError ? (
                   <div className="flex flex-col items-center justify-center gap-4 p-6 min-h-[300px]">
@@ -746,8 +761,9 @@ function App() {
                   <button
                     type="button"
                     onClick={() => window.open(directionsUrl, "_blank")}
-                    className="mt-2 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-teal-500 hover:bg-teal-600 text-white text-xs font-semibold shadow-lg"
+                    className="mt-2 inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
                   >
+                    <Navigation className="w-4 h-4" />
                     Start in Google Maps
                   </button>
                 </div>
