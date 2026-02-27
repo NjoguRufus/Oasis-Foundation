@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight, Navigation } from 'lucide-react';
-import { useJsApiLoader, GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import { useJsApiLoader } from '@react-google-maps/api';
 import NavigationModal from './components/NavigationModal';
 import Loader from './components/Loader';
-
-const MAP_CONTAINER_STYLE = { width: '100%', height: '100%', minHeight: '450px' };
 const DESTINATION = { lat: -1.1921635987964438, lng: 36.94331377496547 };
 const MAP_CENTER = DESTINATION;
 
@@ -174,15 +172,9 @@ function App() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showCounselingRoom, setShowCounselingRoom] = useState(false);
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
-  const [directionsResult, setDirectionsResult] = useState<google.maps.DirectionsResult | null>(null);
-  const [locationError, setLocationError] = useState<string | null>(null);
-  const [tripStarted, setTripStarted] = useState(false);
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
   const [showMaintenancePage, setShowMaintenancePage] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-
-  const mapRef = useRef<google.maps.Map | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsInitialLoad(false), 2000);
@@ -193,51 +185,6 @@ function App() {
   const { isLoaded: isMapsLoaded, loadError: mapsLoadError } = useJsApiLoader({
     googleMapsApiKey: googleMapsApiKey || '',
   });
-
-  const mapOptions = useMemo(
-    () => ({
-      center: MAP_CENTER,
-      zoom: 13,
-      disableDefaultUI: false,
-      zoomControl: true,
-      streetViewControl: true,
-      mapTypeControl: true,
-    }),
-    []
-  );
-
-  // Get user location once maps are loaded (for inline directions map)
-  useEffect(() => {
-    if (!isMapsLoaded || !googleMapsApiKey) return;
-
-    setLocationError(null);
-    if (!navigator.geolocation) {
-      setLocationError('Location is not supported by your browser.');
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      () => setLocationError('Could not get your location. Please allow location access or use the link below.')
-    );
-  }, [isMapsLoaded, googleMapsApiKey]);
-
-  const handleMapLoad = useCallback((map: google.maps.Map) => {
-    mapRef.current = map;
-  }, []);
-
-  const handleStartTrip = useCallback(() => {
-    if (!directionsResult || !mapRef.current) return;
-    const route = directionsResult.routes[0];
-    if (!route) return;
-
-    const bounds = new google.maps.LatLngBounds();
-    route.legs.forEach((leg) => {
-      bounds.extend(leg.start_location);
-      bounds.extend(leg.end_location);
-    });
-    mapRef.current.fitBounds(bounds);
-    setTripStarted(true);
-  }, [directionsResult]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -294,7 +241,8 @@ function App() {
 
   const directionsUrl =
     "https://www.google.com/maps/dir/?api=1&origin=current+location&destination=-1.1921635987964438,36.94331377496547&travelmode=walking&dir_action=navigate";
-  const placeEmbedUrl = "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.954678043403!2d36.94331377496547!3d-1.1921635987964438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTEnMzEuOCJTIDM2wrA1Nic0NS4yIkU!5e0!3m2!1sen!2ske!4v1770878328422!5m2!1sen!2ske";
+  const placeEmbedUrl =
+    "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2722.002058935964!2d36.94480852201997!3d-1.1923852933770536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTEnMzEuOCJTIDM2wrA1Nic0NS4yIkU!5e0!3m2!1sen!2ske!4v1772223201907!5m2!1sen!2ske";
 
   if (isInitialLoad) {
     return (
@@ -646,128 +594,34 @@ function App() {
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Find Us</h2>
               <p className="text-gray-500 text-sm text-center max-w-2xl mx-auto mb-6">
                 Use the map below to pan, zoom, and view the route from your current location to <span className="font-semibold">Oasis Recovery Home</span>.
-                When asked, please allow location access so we can draw the trail.
+                When you allow location access below, we can draw your route on the map.
               </p>
 
-              <div className="rounded-xl overflow-hidden shadow-lg max-w-5xl mx-auto" style={{ minHeight: 450 }}>
-                {!googleMapsApiKey ? (
-                  <>
-                    <iframe
-                      src={placeEmbedUrl}
-                      title="Oasis Recovery Home location"
-                      className="w-full h-full min-h-[300px]"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    />
-                    <div className="mt-3 flex flex-col items-center gap-2 pb-1">
-                      <a
-                        href={directionsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
-                      >
-                        <Navigation className="w-4 h-4" />
-                        Open directions in Google Maps
-                      </a>
-                      <p className="text-gray-400 text-xs">
-                        Add <code className="text-[0.7rem] bg-gray-100 px-1 rounded">VITE_GOOGLE_MAPS_API_KEY</code> in <code className="text-[0.7rem] bg-gray-100 px-1 rounded">.env</code> to show the live route here.
-                      </p>
-                    </div>
-                  </>
-                ) : mapsLoadError ? (
-                  <div className="flex flex-col items-center justify-center gap-4 p-6 min-h-[300px]">
-                    <p className="text-gray-600 text-center">
-                      The interactive map failed to load. You can still get directions in Google Maps.
-                    </p>
-                    <a
-                      href={directionsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
-                    >
-                      <Navigation className="w-4 h-4" />
-                      Open directions in Google Maps
-                    </a>
-                  </div>
-                ) : !isMapsLoaded ? (
-                  <div className="flex items-center justify-center min-h-[300px]">
-                    <Loader />
-                  </div>
-                ) : locationError ? (
-                  <div className="flex flex-col items-center justify-center gap-4 p-6 min-h-[300px]">
-                    <p className="text-gray-600 text-center">
-                      {locationError}
-                    </p>
-                    <a
-                      href={directionsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
-                    >
-                      <Navigation className="w-4 h-4" />
-                      Open directions in Google Maps
-                    </a>
-                  </div>
-                ) : (
-                  <GoogleMap
-                    mapContainerStyle={MAP_CONTAINER_STYLE}
-                    options={mapOptions}
-                    onLoad={handleMapLoad}
-                  >
-                    {userLocation && !directionsResult && (
-                      <DirectionsService
-                        options={{
-                          origin: userLocation,
-                          destination: DESTINATION,
-                          travelMode: google.maps.TravelMode.DRIVING,
-                        }}
-                        callback={(result, status) => {
-                          if (status === google.maps.DirectionsStatus.OK && result) {
-                            setDirectionsResult(result);
-                          }
-                        }}
-                      />
-                    )}
-                    {directionsResult && <DirectionsRenderer directions={directionsResult} />}
-                  </GoogleMap>
-                )}
+              <div className="rounded-xl overflow-hidden shadow-lg max-w-5xl mx-auto h-[450px]">
+                <iframe
+                  src={placeEmbedUrl}
+                  title="Oasis Recovery Home location"
+                  className="w-full h-full"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
 
-              {googleMapsApiKey && isMapsLoaded && (
-                <div className="text-center mt-3 text-xs text-gray-400 space-y-1">
-                  {directionsResult && (
-                    (() => {
-                      const leg = directionsResult.routes[0]?.legs[0];
-                      if (!leg) return null;
-                      return (
-                        <p>
-                          Trip summary:{" "}
-                          <span className="font-semibold text-gray-500">
-                            {leg.distance?.text}
-                          </span>{" "}
-                          ·{" "}
-                          <span className="font-semibold text-gray-500">
-                            {leg.duration?.text}
-                          </span>
-                        </p>
-                      );
-                    })()
-                  )}
-                  <p>
-                    If the route doesn&apos;t appear, try refreshing the page or use the button above to open Google Maps.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => window.open(directionsUrl, "_blank")}
-                    className="mt-2 inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
-                  >
-                    <Navigation className="w-4 h-4" />
-                    Start in Google Maps
-                  </button>
-                </div>
-              )}
+              <div className="text-center mt-3 text-xs text-gray-400 space-y-2">
+                <p>
+                  If the route doesn&apos;t appear, refresh the page or tap “Start in Google Maps” below to begin navigation.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => window.open(directionsUrl, "_blank")}
+                  className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
+                >
+                  <Navigation className="w-4 h-4" />
+                  Start in Google Maps
+                </button>
+              </div>
             </div>
           </section>
 
