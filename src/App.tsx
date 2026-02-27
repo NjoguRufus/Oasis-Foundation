@@ -178,7 +178,7 @@ function App() {
   const [locationError, setLocationError] = useState<string | null>(null);
   const [tripStarted, setTripStarted] = useState(false);
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
-  const [showMaintenancePage, setShowMaintenancePage] = useState(true);
+  const [showMaintenancePage, setShowMaintenancePage] = useState(false);
 
   const mapRef = useRef<google.maps.Map | null>(null);
 
@@ -285,7 +285,8 @@ function App() {
     window.open(whatsappUrl, '_blank');
   };
 
-  const directionsUrl = "https://www.google.com/maps/dir/?api=1&origin=current+location&destination=-1.1921635987964438,36.94331377496547";
+  const directionsUrl =
+    "https://www.google.com/maps/dir/?api=1&origin=current+location&destination=-1.1921635987964438,36.94331377496547&travelmode=walking&dir_action=navigate";
   const placeEmbedUrl = "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.954678043403!2d36.94331377496547!3d-1.1921635987964438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTEnMzEuOCJTIDM2wrA1Nic0NS4yIkU!5e0!3m2!1sen!2ske!4v1770878328422!5m2!1sen!2ske";
 
   if (showMaintenancePage) {
@@ -742,24 +743,15 @@ function App() {
                   <p>
                     If the route doesn&apos;t appear, try refreshing the page or use the button above to open Google Maps.
                   </p>
+                  <button
+                    type="button"
+                    onClick={() => window.open(directionsUrl, "_blank")}
+                    className="mt-2 inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-teal-500 hover:bg-teal-600 text-white text-xs font-semibold shadow-lg"
+                  >
+                    Start in Google Maps
+                  </button>
                 </div>
               )}
-
-              <div className="flex justify-center mt-6">
-                <button
-                  type="button"
-                  onClick={handleOpenNavigation}
-                  disabled={!googleMapsApiKey}
-                  className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold shadow-md transition-colors ${
-                    !googleMapsApiKey
-                      ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
-                      : 'bg-gray-900 text-white hover:bg-black'
-                  }`}
-                >
-                  <Navigation className="w-4 h-4" />
-                  Start live walking navigation
-                </button>
-              </div>
             </div>
           </section>
 

@@ -123,16 +123,6 @@ export const NavigationModal: React.FC<NavigationModalProps> = ({
             <div className="pointer-events-auto max-w-md w-full">
               <InstructionPanel nav={nav} />
             </div>
-            <button
-              type="button"
-              onClick={() => {
-                const url = `https://www.google.com/maps/dir/?api=1&destination=${destination.lat},${destination.lng}&travelmode=walking&dir_action=navigate`;
-                window.open(url, "_blank");
-              }}
-              className="pointer-events-auto inline-flex items-center justify-center px-4 py-2 rounded-full bg-teal-500 hover:bg-teal-600 text-white text-xs font-semibold shadow-lg"
-            >
-              Use Google Maps
-            </button>
           </div>
         </div>
       )}
