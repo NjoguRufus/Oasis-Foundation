@@ -3,6 +3,43 @@ import styled from "styled-components";
 
 const LOGO_URL = "https://i.imgur.com/xgNrrHt.png";
 
+/* Independent logo – use on its own or inside Loader. Flexible sizing/positioning. */
+const LogoWrapper = styled.div<{ $opacity?: number; $size?: string }>`
+  flex-shrink: 0;
+  width: ${(p) => p.$size ?? "clamp(160px, 48vmin, 420px)"};
+  height: ${(p) => p.$size ?? "clamp(160px, 48vmin, 420px)"};
+  max-width: 100%;
+  max-height: 100%;
+  opacity: ${(p) => p.$opacity ?? 0.2};
+  background-image: url(${LOGO_URL});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
+`;
+
+export type LoaderLogoProps = {
+  /** Opacity 0–1. Default 0.2 for subtle bg. */
+  opacity?: number;
+  /** CSS size (e.g. "200px", "50vw", "clamp(120px, 40vmin, 320px)"). Default: responsive clamp. */
+  size?: string;
+  className?: string;
+};
+
+/** Standalone logo for loading screens or reuse elsewhere. */
+export const LoaderLogo: React.FC<LoaderLogoProps> = ({
+  opacity = 0.2,
+  size,
+  className,
+}) => (
+  <LogoWrapper
+    className={className}
+    $opacity={opacity}
+    $size={size}
+    aria-hidden="true"
+  />
+);
+
 const StyledWrapper = styled.div`
   position: relative;
   display: flex;
@@ -12,18 +49,6 @@ const StyledWrapper = styled.div`
   gap: 0.75rem;
   min-height: 100%;
   min-width: 100%;
-
-  .logo-bg {
-    position: absolute;
-    inset: 0;
-    background-image: url(${LOGO_URL});
-    background-repeat: no-repeat;
-    background-position: center;
-    /* Big but responsive: min 160px on small screens, max 420px on large, scales with viewport */
-    background-size: clamp(160px, 48vmin, 420px);
-    opacity: 0.2;
-    pointer-events: none;
-  }
 
   .loader {
     position: relative;
@@ -126,7 +151,7 @@ const Loader: React.FC = () => {
 
   return (
     <StyledWrapper>
-      <div className="logo-bg" aria-hidden="true" />
+      <LoaderLogo />
       <div className="loader" />
       <div className="loading-text">
         Oasis Loading{DOTS[dotIndex]}
