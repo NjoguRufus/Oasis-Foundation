@@ -600,8 +600,7 @@ function App() {
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Find Us</h2>
               <p className="text-gray-500 text-sm text-center max-w-2xl mx-auto mb-6">
-                Use the map below to pan, zoom, and view the route from your current location to <span className="font-semibold">Oasis Recovery Home</span>.
-                When you allow location access below, we can draw your route on the map.
+                View our location on the map below. Tap the &quot;Start in Google Maps&quot; button to begin navigation to <span className="font-semibold">Oasis Recovery Home</span>.
               </p>
 
               <div className="rounded-xl overflow-hidden shadow-lg max-w-5xl mx-auto h-[450px]">
@@ -645,7 +644,7 @@ function App() {
                     </div>
                     <div className="flex items-center">
                       <Mail className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>oasiswellness2020@gmail.com</p>
+                      <p>oasiswellness2021@gmail.com</p>
                     </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
@@ -732,7 +731,7 @@ function App() {
               <div className="space-y-2 text-gray-400 text-sm">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-coral-500" />
-                  <p>oasiswellness2020@gmail.com</p>
+                  <p>oasiswellness2021@gmail.com</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-coral-500" />
