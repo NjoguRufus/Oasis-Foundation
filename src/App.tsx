@@ -553,6 +553,8 @@ function App() {
                     "/images/new%20images/outsidetabo.png",
                     "/images/new%20images/Bedrooms.png",
                     "/images/new%20images/sitting%202.png",
+                    "/images/new%20images/mercy.png",
+                    "/images/new%20images/facing%20the%20house.png",
                     "https://i.imgur.com/kRm1neK.jpg",
                     "https://i.imgur.com/z3FuBsu.jpg",
                     "https://i.imgur.com/3dltxcb.jpg",
@@ -616,7 +618,7 @@ function App() {
 
               <div className="text-center mt-3 text-xs text-gray-400 space-y-2">
                 <p>
-                  If the route doesn&apos;t appear, refresh the page or tap “Start in Google Maps” below to begin navigation.
+                  Tap “Start in Google Maps” button below to Begin Navigation.
                 </p>
                 <button
                   type="button"
