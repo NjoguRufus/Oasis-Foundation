@@ -10,9 +10,9 @@ const MAP_CENTER = DESTINATION;
 function Logo() {
   return (
     <div className="flex items-center gap-4">
-      <img src="https://i.imgur.com/xgNrrHt.png" alt="Oasis Recovery Home Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
+      <img src="https://i.imgur.com/xgNrrHt.png" alt="Oasis Wellness Foundation Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
       <div className="flex flex-col">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Oasis Recovery Home</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Oasis Wellness Foundation</h1>
         <div className="flex flex-col">
           <p className="text-sm md:text-base text-coral-500">Recover With Dignity</p>
         </div>
@@ -32,12 +32,12 @@ function ImageSlideshow() {
   const [direction, setDirection] = useState<'left' | 'right'>('right');
 
   const images = [
-    { url: "https://i.imgur.com/iIc6xs5.jpg", alt: "Oasis Recovery Home Event 1" },
-    { url: "https://i.imgur.com/q3lmvYB.jpg", alt: "Oasis Recovery Home Event 2" },
-    { url: "https://i.imgur.com/p1BerMb.jpg", alt: "Oasis Recovery Home Event 3" },
-    { url: " https://i.imgur.com/L8nmapU.jpg", alt: "Oasis Recovery Home Event 4" },
-    { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Recovery Home Event 5" },
-    { url: "https://i.imgur.com/0Q1DGfU.jpg", alt: "Oasis Recovery Home Event 6"}
+    { url: "https://i.imgur.com/iIc6xs5.jpg", alt: "Oasis Wellness Foundation Event 1" },
+    { url: "https://i.imgur.com/q3lmvYB.jpg", alt: "Oasis Wellness Foundation Event 2" },
+    { url: "https://i.imgur.com/p1BerMb.jpg", alt: "Oasis Wellness Foundation Event 3" },
+    { url: " https://i.imgur.com/L8nmapU.jpg", alt: "Oasis Wellness Foundation Event 4" },
+    { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Wellness Foundation Event 5" },
+    { url: "https://i.imgur.com/0Q1DGfU.jpg", alt: "Oasis Wellness Foundation Event 6"}
   ];
 
   const nextSlide = useCallback(() => {
@@ -293,11 +293,11 @@ function App() {
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
         <img
           src="https://i.imgur.com/xgNrrHt.png"
-          alt="Oasis Recovery Home Logo"
+          alt="Oasis Wellness Foundation Logo"
           className="w-24 h-24 md:w-32 md:h-32 object-contain mb-6"
         />
         <h1 className="text-2xl md:text-3xl font-bold text-teal-500 text-center mb-2">
-          Oasis Recovery Home
+          Oasis Wellness Foundation
         </h1>
         <p className="text-coral-500 text-sm md:text-base text-center mb-8 italic">we care</p>
         <p className="text-gray-600 text-lg md:text-xl font-semibold text-center mb-10">
@@ -431,10 +431,10 @@ function App() {
                 <div>
                   <h3 className="text-2xl font-semibold mb-4 text-teal-400">Our Story</h3>
                   <p className="text-gray-600 mb-6">
-                    Oasis Recovery Home was established in 2020 after recognizing the urgent need to support individuals struggling with drug and substance disorders. Many were willing to recover but lacked the necessary support system.
+                    Oasis Wellness Foundation was established in 2020 after recognizing the urgent need to support individuals and communities affected by drug and substance disorders. Many people were willing to recover but lacked the necessary support systems.
                   </p>
                   <p className="text-gray-600">
-                    Our organization is dedicated to providing both inpatient and outpatient care, guiding individuals—both male and female—on their journey to recovery. Through a compassionate and structured approach, we strive to empower individuals to regain control of their lives and achieve lasting wellness.
+                    Our organization provides both inpatient and outpatient care, guiding individuals on their journey to recovery while also promoting community wellness initiatives. Through a compassionate and structured approach, we strive to empower individuals to regain control of their lives and achieve lasting well-being.
                   </p>
                 </div>
               </div>
@@ -499,6 +499,22 @@ function App() {
                     <p className="text-gray-600">
                       Our workshops bring together healthcare professionals, community leaders, and individuals affected by addiction to foster understanding and create lasting solutions.
                     </p>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div className="order-2 md:order-1">
+                    <h3 className="text-2xl font-semibold mb-4 text-teal-400">Supporting Community Health Promoters (CHPs)</h3>
+                    <p className="text-gray-600">
+                      We collaborate with Community Health Promoters (CHPs) across counties to strengthen community-based health support systems. By working alongside these frontline health workers, Oasis Wellness Foundation promotes wellness education, addiction awareness, and community-based prevention programs that improve the health and well-being of communities.
+                    </p>
+                  </div>
+                  <div className="order-1 md:order-2">
+                    <img 
+                      src="/images/chp.png" 
+                      alt="Community health and wellness" 
+                      className="rounded-lg shadow-lg w-full h-[400px] object-cover"
+                    />
                   </div>
                 </div>
               </div>
@@ -629,7 +645,7 @@ function App() {
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Find Us</h2>
               <p className="text-gray-500 text-sm text-center max-w-2xl mx-auto mb-6">
-                Use the map below to pan, zoom, and view the route from your current location to <span className="font-semibold">Oasis Recovery Home</span>.
+                Use the map below to pan, zoom, and view the route from your current location to <span className="font-semibold">Oasis Wellness Foundation</span>.
                 When asked, please allow location access so we can draw the trail.
               </p>
 
@@ -638,7 +654,7 @@ function App() {
                   <>
                     <iframe
                       src={placeEmbedUrl}
-                      title="Oasis Recovery Home location"
+                      title="Oasis Wellness Foundation location"
                       className="w-full h-full min-h-[300px]"
                       style={{ border: 0 }}
                       allowFullScreen
@@ -885,7 +901,7 @@ function App() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400 text-sm">
-            <p>&copy; {new Date().getFullYear()} Oasis Recovery Home. All rights reserved.</p>
+            <p>&copy; 2026 Oasis Wellness Foundation. All rights reserved.</p>
             <div className="mt-3 text-xs flex items-center justify-center gap-2">
               <span>Developed and Maintained by</span>
               <a href="https://astraronix.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-coral-500 hover:underline">
