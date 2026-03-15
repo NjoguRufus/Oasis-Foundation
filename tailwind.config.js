@@ -3,6 +3,20 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      keyframes: {
+        "approval-in": {
+          "0%": { opacity: "0", transform: "scale(0.96)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        "approval-in": "approval-in 0.2s ease-out forwards",
+        "fade-in": "fade-in 0.2s ease-out forwards",
+      },
       colors: {
         teal: {
           50: '#f0fdfa',

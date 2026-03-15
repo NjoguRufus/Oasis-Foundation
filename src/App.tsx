@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight, Navigation } from 'lucide-react';
 import { useJsApiLoader, GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import NavigationModal from './components/NavigationModal';
+import PaymentApprovalModal from './components/PaymentApprovalModal';
+import Loader from './components/Loader';
 
 const MAP_CONTAINER_STYLE = { width: '100%', height: '100%', minHeight: '450px' };
 const DESTINATION = { lat: -1.1921635987964438, lng: 36.94331377496547 };
@@ -173,64 +175,43 @@ function App() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showCounselingRoom, setShowCounselingRoom] = useState(false);
+  const [isNavigationOpen, setIsNavigationOpen] = useState(false);
+  const [showApprovalModal, setShowApprovalModal] = useState(true);
+  const [showMaintenancePage, setShowMaintenancePage] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [directionsResult, setDirectionsResult] = useState<google.maps.DirectionsResult | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
-  const [tripStarted, setTripStarted] = useState(false);
-  const [isNavigationOpen, setIsNavigationOpen] = useState(false);
-  const [showMaintenancePage, setShowMaintenancePage] = useState(true);
 
-  const mapRef = useRef<google.maps.Map | null>(null);
+  useEffect(() => {
+    const timer = setTimeout(() => setIsInitialLoad(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string | undefined;
   const { isLoaded: isMapsLoaded, loadError: mapsLoadError } = useJsApiLoader({
     googleMapsApiKey: googleMapsApiKey || '',
   });
 
-  const mapOptions = useMemo(
-    () => ({
-      center: MAP_CENTER,
-      zoom: 13,
-      disableDefaultUI: false,
-      zoomControl: true,
-      streetViewControl: true,
-      mapTypeControl: true,
-    }),
-    []
-  );
-
-  // Get user location once maps are loaded (for inline directions map)
   useEffect(() => {
-    if (!isMapsLoaded || !googleMapsApiKey) return;
-
-    setLocationError(null);
+    if (!googleMapsApiKey || !isMapsLoaded) return;
     if (!navigator.geolocation) {
-      setLocationError('Location is not supported by your browser.');
+      setLocationError('Geolocation is not supported by your browser.');
       return;
     }
     navigator.geolocation.getCurrentPosition(
-      (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      () => setLocationError('Could not get your location. Please allow location access or use the link below.')
+      (position) => {
+        setUserLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+        setLocationError(null);
+      },
+      () => {
+        setLocationError('Unable to get your location. You can still use the link below to open directions in Google Maps.');
+      }
     );
-  }, [isMapsLoaded, googleMapsApiKey]);
+  }, [googleMapsApiKey, isMapsLoaded]);
 
-  const handleMapLoad = useCallback((map: google.maps.Map) => {
-    mapRef.current = map;
-  }, []);
-
-  const handleStartTrip = useCallback(() => {
-    if (!directionsResult || !mapRef.current) return;
-    const route = directionsResult.routes[0];
-    if (!route) return;
-
-    const bounds = new google.maps.LatLngBounds();
-    route.legs.forEach((leg) => {
-      bounds.extend(leg.start_location);
-      bounds.extend(leg.end_location);
-    });
-    mapRef.current.fitBounds(bounds);
-    setTripStarted(true);
-  }, [directionsResult]);
+  const mapOptions = useMemo(() => ({ center: MAP_CENTER, zoom: 15 }), []);
+  const handleMapLoad = useCallback(() => {}, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -285,8 +266,18 @@ function App() {
     window.open(whatsappUrl, '_blank');
   };
 
-  const directionsUrl = "https://www.google.com/maps/dir/?api=1&origin=current+location&destination=-1.1921635987964438,36.94331377496547";
-  const placeEmbedUrl = "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.954678043403!2d36.94331377496547!3d-1.1921635987964438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTEnMzEuOCJTIDM2wrA1Nic0NS4yIkU!5e0!3m2!1sen!2ske!4v1770878328422!5m2!1sen!2ske";
+  const directionsUrl =
+    "https://www.google.com/maps/dir/?api=1&origin=current+location&destination=-1.1921635987964438,36.94331377496547&travelmode=walking&dir_action=navigate";
+  const placeEmbedUrl =
+    "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2722.002058935964!2d36.94480852201997!3d-1.1923852933770536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTEnMzEuOCJTIDM2wrA1Nic0NS4yIkU!5e0!3m2!1sen!2ske!4v1772223201907!5m2!1sen!2ske";
+
+  if (isInitialLoad) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <Loader />
+      </div>
+    );
+  }
 
   if (showMaintenancePage) {
     return (
@@ -600,6 +591,13 @@ function App() {
               <div className="relative">
                 <div className="flex overflow-x-auto pb-8 gap-4 snap-x snap-mandatory scrollbar-hide">
                   {[
+                    "/images/new%20images/sitting%20area.png",
+                    "/images/new%20images/environment.png",
+                    "/images/new%20images/outsidetabo.png",
+                    "/images/new%20images/Bedrooms.png",
+                    "/images/new%20images/sitting%202.png",
+                    "/images/new%20images/mercy.png",
+                    "/images/new%20images/facing%20the%20house.png",
                     "https://i.imgur.com/kRm1neK.jpg",
                     "https://i.imgur.com/z3FuBsu.jpg",
                     "https://i.imgur.com/3dltxcb.jpg",
@@ -735,45 +733,17 @@ function App() {
                 )}
               </div>
 
-              {googleMapsApiKey && isMapsLoaded && (
-                <div className="text-center mt-3 text-xs text-gray-400 space-y-1">
-                  {directionsResult && (
-                    (() => {
-                      const leg = directionsResult.routes[0]?.legs[0];
-                      if (!leg) return null;
-                      return (
-                        <p>
-                          Trip summary:{" "}
-                          <span className="font-semibold text-gray-500">
-                            {leg.distance?.text}
-                          </span>{" "}
-                          ·{" "}
-                          <span className="font-semibold text-gray-500">
-                            {leg.duration?.text}
-                          </span>
-                        </p>
-                      );
-                    })()
-                  )}
-                  <p>
-                    If the route doesn&apos;t appear, try refreshing the page or use the button above to open Google Maps.
-                  </p>
-                </div>
-              )}
-
-              <div className="flex justify-center mt-6">
+              <div className="text-center mt-3 text-xs text-gray-400 space-y-2">
+                <p>
+                  Tap “Start in Google Maps” button below to Begin Navigation.
+                </p>
                 <button
                   type="button"
-                  onClick={handleOpenNavigation}
-                  disabled={!googleMapsApiKey}
-                  className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold shadow-md transition-colors ${
-                    !googleMapsApiKey
-                      ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
-                      : 'bg-gray-900 text-white hover:bg-black'
-                  }`}
+                  onClick={() => window.open(directionsUrl, "_blank")}
+                  className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
                 >
                   <Navigation className="w-4 h-4" />
-                  Start live walking navigation
+                  Start in Google Maps
                 </button>
               </div>
             </div>
@@ -792,7 +762,7 @@ function App() {
                     </div>
                     <div className="flex items-center">
                       <Mail className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>oasiswellness2020@gmail.com</p>
+                      <p>oasiswellness2021@gmail.com</p>
                     </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
@@ -879,7 +849,7 @@ function App() {
               <div className="space-y-2 text-gray-400 text-sm">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-coral-500" />
-                  <p>oasiswellness2020@gmail.com</p>
+                  <p>oasiswellness2021@gmail.com</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-coral-500" />
@@ -922,6 +892,15 @@ function App() {
           loadError={mapsLoadError}
         />
       )}
+      <PaymentApprovalModal
+        isOpen={showApprovalModal}
+        onClose={() => setShowApprovalModal(false)}
+        clientName="Astraronix Solutions"
+        amount={5695}
+        oldPlan="Fixed Name Plan"
+        newPlan="Dynamic Name Plan"
+        logoSrc="/images/approva.png"
+      />
     </div>
   );
 }

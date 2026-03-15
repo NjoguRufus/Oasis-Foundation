@@ -7,6 +7,7 @@ import {
 } from "../hooks/useLiveNavigation";
 import NavigationMap from "./NavigationMap";
 import InstructionPanel from "./InstructionPanel";
+import Loader from "./Loader";
 
 export type NavigationModalProps = {
   destination: LatLng;
@@ -103,10 +104,8 @@ export const NavigationModal: React.FC<NavigationModalProps> = ({
 
       {/* Loading */}
       {apiKey && !loadError && !isLoaded && (
-        <div className="flex-1 flex items-center justify-center text-sm text-gray-700">
-          <div className="bg-white rounded-2xl shadow-lg px-4 py-3 text-center">
-            Loading map…
-          </div>
+        <div className="flex-1 flex items-center justify-center">
+          <Loader />
         </div>
       )}
 
@@ -123,16 +122,6 @@ export const NavigationModal: React.FC<NavigationModalProps> = ({
             <div className="pointer-events-auto max-w-md w-full">
               <InstructionPanel nav={nav} />
             </div>
-            <button
-              type="button"
-              onClick={() => {
-                const url = `https://www.google.com/maps/dir/?api=1&destination=${destination.lat},${destination.lng}&travelmode=walking&dir_action=navigate`;
-                window.open(url, "_blank");
-              }}
-              className="pointer-events-auto inline-flex items-center justify-center px-4 py-2 rounded-full bg-teal-500 hover:bg-teal-600 text-white text-xs font-semibold shadow-lg"
-            >
-              Use Google Maps
-            </button>
           </div>
         </div>
       )}
