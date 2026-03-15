@@ -493,20 +493,73 @@ function App() {
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                  <div className="order-2 md:order-1">
-                    <h3 className="text-2xl font-semibold mb-4 text-teal-400">Supporting Community Health Promoters (CHPs)</h3>
-                    <p className="text-gray-600">
-                      We collaborate with Community Health Promoters (CHPs) across counties to strengthen community-based health support systems. By working alongside these frontline health workers, Oasis Wellness Foundation promotes wellness education, addiction awareness, and community-based prevention programs that improve the health and well-being of communities.
-                    </p>
+                <div className="space-y-10">
+                  <h3 className="text-2xl font-semibold text-teal-400">Community Health Promoters (CHP)</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    In Kenya, Community Health Promoters (CHPs) are the unsung heroes of healthcare. These dedicated individuals bridge the gap between communities and healthcare facilities, bringing essential services to the doorstep of those who need it most.
+                  </p>
+                  <p className="text-gray-600 leading-relaxed">
+                    <span className="font-semibold text-gray-800">Who are CHPs?</span> CHPs are trained community members who provide basic healthcare services, promote healthy practices, and refer patients to higher-level facilities when needed. They&apos;re the first point of contact for many Kenyans, especially in rural and informal settlements.
+                  </p>
+
+                  <div className="grid md:grid-cols-2 gap-12 items-start">
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-3">Key Roles of CHPs</h4>
+                        <ul className="text-gray-600 space-y-2 list-disc pl-5">
+                          <li><span className="font-medium text-gray-700">Health Education:</span> Sensitizing communities on disease prevention, hygiene, and healthy lifestyles.</li>
+                          <li><span className="font-medium text-gray-700">Disease Surveillance:</span> Monitoring and reporting disease outbreaks, and referring cases to healthcare facilities.</li>
+                          <li><span className="font-medium text-gray-700">Basic Care:</span> Providing basic medical services like first aid, immunizations, and treatment for minor illnesses.</li>
+                          <li><span className="font-medium text-gray-700">Link to Healthcare:</span> Connecting patients to higher-level facilities for specialized care.</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-2">Impact of CHPs</h4>
+                        <ul className="text-gray-600 space-y-1 list-disc pl-5">
+                          <li>Improved healthcare outcomes, especially for maternal and child health.</li>
+                          <li>Increased access to healthcare services for marginalized communities.</li>
+                          <li>Enhanced disease surveillance and response.</li>
+                          <li>Empowered communities taking charge of their health.</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-2">Challenges Faced by CHPs</h4>
+                        <ul className="text-gray-600 space-y-1 list-disc pl-5">
+                          <li>Limited resources and equipment.</li>
+                          <li>Inadequate training and support.</li>
+                          <li>Stipend delays and inconsistencies.</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-2">Way Forward</h4>
+                        <p className="text-gray-600 mb-2">To maximize their impact, CHPs need:</p>
+                        <ul className="text-gray-600 space-y-1 list-disc pl-5">
+                          <li>Regular training and capacity building.</li>
+                          <li>Adequate resources and equipment.</li>
+                          <li>Consistent stipends and recognition.</li>
+                        </ul>
+                      </div>
+                      <p className="text-gray-600 leading-relaxed italic border-l-4 border-teal-400 pl-4">
+                        CHPs are crucial in achieving Universal Health Coverage in Kenya. Let&apos;s support and empower them to continue serving our communities.
+                      </p>
+                    </div>
+                    <div className="space-y-4">
+                      <img
+                        src="/images/chp.png"
+                        alt="Community Health Promoters in the community"
+                        className="rounded-lg shadow-lg w-full h-[280px] object-cover"
+                      />
+                      <img
+                        src="/images/chp2.png"
+                        alt="CHPs delivering health services"
+                        className="rounded-lg shadow-lg w-full h-[280px] object-cover"
+                      />
+                    </div>
                   </div>
-                  <div className="order-1 md:order-2">
-                    <img 
-                      src="/images/chp.png" 
-                      alt="Community health and wellness" 
-                      className="rounded-lg shadow-lg w-full h-[400px] object-cover"
-                    />
-                  </div>
+
+                  <p className="text-gray-600 leading-relaxed">
+                    Oasis Wellness Foundation collaborates with CHPs across counties to strengthen community-based health support systems. By working alongside these frontline health workers, we promote wellness education, addiction awareness, and community-based prevention programs that improve the health and well-being of communities.
+                  </p>
                 </div>
               </div>
             </div>
