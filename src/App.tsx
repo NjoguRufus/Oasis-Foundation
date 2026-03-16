@@ -494,7 +494,7 @@ function App() {
                 </div>
 
                 <div className="space-y-10">
-                  <h3 className="text-2xl font-semibold text-teal-400">Community Health Promoters CHP&apos;s</h3>
+                  <h3 className="text-2xl font-semibold text-teal-400">Community Health Promoters (CHPs)</h3>
                   <p className="text-gray-600 leading-relaxed">
                     In Kenya, Community Health Promoters (CHPs) are the unsung heroes of healthcare. These dedicated individuals bridge the gap between communities and healthcare facilities, bringing essential services to the doorstep of those who need it most.
                   </p>
