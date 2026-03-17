@@ -177,7 +177,7 @@ function App() {
   const [showCounselingRoom, setShowCounselingRoom] = useState(false);
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
   const [showApprovalModal, setShowApprovalModal] = useState(false);
-  const [showMaintenancePage, setShowMaintenancePage] = useState(false);
+  const [showMaintenancePage, setShowMaintenancePage] = useState(true);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [directionsResult, setDirectionsResult] = useState<google.maps.DirectionsResult | null>(null);
@@ -295,15 +295,9 @@ function App() {
           Website under Maintenance
         </p>
         <p className="text-gray-500 text-sm text-center max-w-md mb-8">
-          We are updating our site to serve you better. Please check back soon.
+          We are updating our site to serve you better. Please check back soon or contact the developer.
         </p>
-        <button
-          type="button"
-          onClick={() => setShowMaintenancePage(false)}
-          className="text-teal-500 hover:text-teal-600 text-sm font-medium underline"
-        >
-          Enter site
-        </button>
+        <Loader />
       </div>
     );
   }

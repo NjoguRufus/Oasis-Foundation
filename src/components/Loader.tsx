@@ -151,11 +151,7 @@ const Loader: React.FC = () => {
 
   return (
     <StyledWrapper>
-      <LoaderLogo />
       <div className="loader" />
-      <div className="loading-text">
-        Oasis Loading{DOTS[dotIndex]}
-      </div>
     </StyledWrapper>
   );
 };
