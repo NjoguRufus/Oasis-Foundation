@@ -281,23 +281,27 @@ function App() {
 
   if (showMaintenancePage) {
     return (
-      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
-        <img
-          src="https://i.imgur.com/xgNrrHt.png"
-          alt="Oasis Wellness Foundation Logo"
-          className="w-24 h-24 md:w-32 md:h-32 object-contain mb-6"
-        />
-        <h1 className="text-2xl md:text-3xl font-bold text-teal-500 text-center mb-2">
-          Oasis Wellness Foundation
-        </h1>
-        <p className="text-coral-500 text-sm md:text-base text-center mb-8 italic">we care</p>
-        <p className="text-gray-600 text-lg md:text-xl font-semibold text-center mb-10">
-          Website under Maintenance
-        </p>
-        <p className="text-gray-500 text-sm text-center max-w-md mb-8">
-          We are updating our site to serve you better. Please check back soon or contact the developer.
-        </p>
-        <Loader />
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center px-4 text-white">
+        <div className="relative z-10 flex flex-col items-center">
+          <img
+            src="https://i.imgur.com/xgNrrHt.png"
+            alt="Oasis Wellness Foundation Logo"
+            className="w-24 h-24 md:w-32 md:h-32 object-contain mb-6"
+          />
+          <h1 className="text-2xl md:text-3xl font-bold text-teal-400 text-center mb-2">
+            Oasis Wellness Foundation
+          </h1>
+          <p className="text-coral-400 text-sm md:text-base text-center mb-8 italic">we care</p>
+          <p className="text-lg md:text-xl font-semibold text-center mb-4 text-teal-100">
+            Website under Maintenance
+          </p>
+          <p className="text-sm text-center max-w-md mb-8 text-slate-200">
+            We are updating our site to serve you better. Please check back soon or contact the developer.
+          </p>
+          <div className="w-full max-w-xs h-40">
+            <Loader />
+          </div>
+        </div>
       </div>
     );
   }
