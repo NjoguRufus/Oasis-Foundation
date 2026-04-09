@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const LOGO_URL = "https://i.imgur.com/xgNrrHt.png";
+const LOGO_URL = "/images/hosted/xgNrrHt.png";
 
 /* Independent logo – use on its own or inside Loader. Flexible sizing/positioning. */
 const LogoWrapper = styled.div<{ $opacity?: number; $size?: string }>`

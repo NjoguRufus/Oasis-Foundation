@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight, Navigation } from 'lucide-react';
+import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight, Navigation, HeartHandshake } from 'lucide-react';
 import { useJsApiLoader, GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import NavigationModal from './components/NavigationModal';
 import PaymentApprovalModal from './components/PaymentApprovalModal';
@@ -12,7 +12,7 @@ const MAP_CENTER = DESTINATION;
 function Logo() {
   return (
     <div className="flex items-center gap-4">
-      <img src="https://i.imgur.com/xgNrrHt.png" alt="Oasis Wellness Foundation Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
+      <img src="/images/hosted/xgNrrHt.png" alt="Oasis Wellness Foundation Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
       <div className="flex flex-col">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Oasis Wellness Foundation</h1>
         <div className="flex flex-col">
@@ -34,12 +34,12 @@ function ImageSlideshow() {
   const [direction, setDirection] = useState<'left' | 'right'>('right');
 
   const images = [
-    { url: "https://i.imgur.com/iIc6xs5.jpg", alt: "Oasis Wellness Foundation Event 1" },
-    { url: "https://i.imgur.com/q3lmvYB.jpg", alt: "Oasis Wellness Foundation Event 2" },
-    { url: "https://i.imgur.com/p1BerMb.jpg", alt: "Oasis Wellness Foundation Event 3" },
-    { url: " https://i.imgur.com/L8nmapU.jpg", alt: "Oasis Wellness Foundation Event 4" },
-    { url: "https://i.imgur.com/iDBDk9y.jpg", alt: "Oasis Wellness Foundation Event 5" },
-    { url: "https://i.imgur.com/0Q1DGfU.jpg", alt: "Oasis Wellness Foundation Event 6"}
+    { url: "/images/hosted/iIc6xs5.jpg", alt: "Oasis Wellness Foundation Event 1" },
+    { url: "/images/hosted/q3lmvYB.jpg", alt: "Oasis Wellness Foundation Event 2" },
+    { url: "/images/hosted/p1BerMb.jpg", alt: "Oasis Wellness Foundation Event 3" },
+    { url: "/images/hosted/L8nmapU.jpg", alt: "Oasis Wellness Foundation Event 4" },
+    { url: "/images/hosted/iDBDk9y.jpg", alt: "Oasis Wellness Foundation Event 5" },
+    { url: "/images/hosted/0Q1DGfU.jpg", alt: "Oasis Wellness Foundation Event 6"}
   ];
 
   const nextSlide = useCallback(() => {
@@ -177,7 +177,7 @@ function App() {
   const [showCounselingRoom, setShowCounselingRoom] = useState(false);
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
   const [showApprovalModal, setShowApprovalModal] = useState(false);
-  const [showMaintenancePage, setShowMaintenancePage] = useState(true);
+  const [showMaintenancePage] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [directionsResult, setDirectionsResult] = useState<google.maps.DirectionsResult | null>(null);
@@ -284,7 +284,7 @@ function App() {
       <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center px-4 text-white">
         <div className="relative z-10 flex flex-col items-center">
           <img
-            src="https://i.imgur.com/xgNrrHt.png"
+            src="/images/hosted/xgNrrHt.png"
             alt="Oasis Wellness Foundation Logo"
             className="w-24 h-24 md:w-32 md:h-32 object-contain mb-6"
           />
@@ -378,7 +378,7 @@ function App() {
           }}
         >
           <img 
-            src="https://i.imgur.com/xgNrrHt.png" 
+            src="/images/hosted/xgNrrHt.png" 
             alt="" 
             className="w-96 h-96 object-contain"
           />
@@ -412,7 +412,7 @@ function App() {
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div>
                   <img 
-                    src="https://i.imgur.com/nw2TnHp.jpg" 
+                    src="/images/hosted/nw2TnHp.jpg" 
                     alt="Our founder speaking at an event" 
                     className="rounded-lg shadow-lg w-full h-[400px] object-cover"
                   />
@@ -437,7 +437,7 @@ function App() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                   <div>
                     <img 
-                      src="https://i.imgur.com/EVjvCqE.jpg" 
+                      src="/images/hosted/EVjvCqE.jpg" 
                       alt="Helping those affected by addiction" 
                     className="rounded-lg shadow-lg w-full h-[400px] object-cover"
                     />
@@ -465,7 +465,7 @@ function App() {
                   </div>
                   <div className="order-1 md:order-2">
                     <img 
-                      src="https://i.imgur.com/q3lmvYB.jpg" 
+                      src="/images/hosted/q3lmvYB.jpg" 
                       alt="Speaking at community event" 
                       className="rounded-lg shadow-lg w-full h-[400px] object-cover"
                     />
@@ -475,7 +475,7 @@ function App() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                   <div>
                     <img 
-                      src="https://i.imgur.com/4xzvn9q.jpg" 
+                      src="/images/hosted/4xzvn9q.jpg" 
                       alt="Workshop session" 
                       className="rounded-lg shadow-lg w-full h-[400px] object-cover"
                     />
@@ -566,10 +566,15 @@ function App() {
           <section id="services" className="py-20 px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Our Services</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
                 {[
+                  {
+                    icon: <HeartHandshake className="w-12 h-12 text-coral-500" />,
+                    title: 'Mental Health Consultancy',
+                    description: 'Professional counselling, assessment, and mental wellness guidance',
+                  },
                   { 
-                    icon: <img src="https://i.imgur.com/4nbFFCV.png" alt="Prevention Icon" className="w-12 h-12" />, 
+                    icon: <img src="/images/hosted/4nbFFCV.png" alt="Prevention Icon" className="w-12 h-12" />, 
                     title: 'Addiction Prevention', 
                     description: 'Proactive sensitization, physcoeducation and support programs' 
                   },
@@ -625,12 +630,12 @@ function App() {
                     </div>
                     <div className="flex gap-4 overflow-x-auto pb-4">
                       <img
-                        src="https://i.imgur.com/W1w7Z4j.jpg"
+                        src="/images/hosted/W1w7Z4j.jpg"
                         alt="Counseling Room 1"
                         className="w-full h-96 object-cover rounded-lg"
                       />
                       <img
-                        src="https://i.imgur.com/6lDw8Nl.jpg"
+                        src="/images/hosted/6lDw8Nl.jpg"
                         alt="Counseling Room 2"
                         className="w-full h-96 object-cover rounded-lg"
                       />
@@ -649,27 +654,27 @@ function App() {
                     "/images/new%20images/sitting%202.png",
                     "/images/new%20images/mercy.png",
                     "/images/new%20images/facing%20the%20house.png",
-                    "https://i.imgur.com/kRm1neK.jpg",
-                    "https://i.imgur.com/z3FuBsu.jpg",
-                    "https://i.imgur.com/3dltxcb.jpg",
-                    "https://i.imgur.com/nbqfHii.jpg",
-                    "https://i.imgur.com/97589Gj.jpg",
-                    "https://i.imgur.com/L8nmapU.jpg",
-                    "https://i.imgur.com/ofDzZFZ.jpg",
-                    "https://i.imgur.com/qg2eJzU.jpg",
-                    "https://i.imgur.com/V9ZjqhE.jpg",
-                    "https://i.imgur.com/Cu7GPbZ.jpg",
-                    "https://i.imgur.com/65o3s72.jpg",
-                    "https://i.imgur.com/cdCAX98.jpg",
-                    "https://i.imgur.com/ArBmc2P.jpg",
-                    "https://i.imgur.com/u30q5RP.jpg",
-                    "https://i.imgur.com/p1BerMb.jpg",
-                    "https://i.imgur.com/hnpC6Jx.jpg",
-                    "https://i.imgur.com/ZTa9vbL.jpg",
-                    "https://i.imgur.com/KSP3DO4.jpg",
-                    "https://i.imgur.com/oegLCYZ.jpg",
-                    "https://i.imgur.com/qorLe79.jpg",
-                    "https://i.imgur.com/b2IJYhD.jpg"
+                    "/images/hosted/kRm1neK.jpg",
+                    "/images/hosted/z3FuBsu.jpg",
+                    "/images/hosted/3dltxcb.jpg",
+                    "/images/hosted/nbqfHii.jpg",
+                    "/images/hosted/97589Gj.jpg",
+                    "/images/hosted/L8nmapU.jpg",
+                    "/images/hosted/ofDzZFZ.jpg",
+                    "/images/hosted/qg2eJzU.jpg",
+                    "/images/hosted/V9ZjqhE.jpg",
+                    "/images/hosted/Cu7GPbZ.jpg",
+                    "/images/hosted/65o3s72.jpg",
+                    "/images/hosted/cdCAX98.jpg",
+                    "/images/hosted/ArBmc2P.jpg",
+                    "/images/hosted/u30q5RP.jpg",
+                    "/images/hosted/p1BerMb.jpg",
+                    "/images/hosted/hnpC6Jx.jpg",
+                    "/images/hosted/ZTa9vbL.jpg",
+                    "/images/hosted/KSP3DO4.jpg",
+                    "/images/hosted/oegLCYZ.jpg",
+                    "/images/hosted/qorLe79.jpg",
+                    "/images/hosted/b2IJYhD.jpg"
                   ].map((imageUrl, index) => (
                     <div 
                       key={index} 
@@ -926,7 +931,7 @@ function App() {
             <div className="mt-3 text-xs flex items-center justify-center gap-2">
               <span>Developed and Maintained by</span>
               <a href="https://astraronix.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-coral-500 hover:underline">
-                <img src="https://i.imgur.com/T7mH4Ly.png" alt="Astraronix Solutions Logo" className="h-5" />
+                <img src="/images/hosted/T7mH4Ly.png" alt="Astraronix Solutions Logo" className="h-5" />
                 <span>Astraronix Solutions</span>
               </a>
             </div>

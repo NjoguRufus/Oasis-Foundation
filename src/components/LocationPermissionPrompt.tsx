@@ -1,7 +1,7 @@
 import React from "react";
 import { MapPin } from "lucide-react";
 
-const LOGO_URL = "https://i.imgur.com/xgNrrHt.png";
+const LOGO_URL = "/images/hosted/xgNrrHt.png";
 
 export type LocationPermissionPromptProps = {
   onAllow: () => void;
