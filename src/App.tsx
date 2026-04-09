@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight, Navigation, HeartHandshake } from 'lucide-react';
+import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight, Navigation, HeartHandshake, ClipboardList } from 'lucide-react';
 import { useJsApiLoader, GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import NavigationModal from './components/NavigationModal';
 import PaymentApprovalModal from './components/PaymentApprovalModal';
@@ -566,12 +566,17 @@ function App() {
           <section id="services" className="py-20 px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Our Services</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[
                   {
                     icon: <HeartHandshake className="w-12 h-12 text-coral-500" />,
                     title: 'Mental Health Consultancy',
                     description: 'Professional counselling, assessment, and mental wellness guidance',
+                  },
+                  {
+                    icon: <ClipboardList className="w-12 h-12 text-teal-400" />,
+                    title: 'Program Design & Planning',
+                    description: 'Evidence-based program frameworks, implementation roadmaps, and monitoring for teams and communities',
                   },
                   { 
                     icon: <img src="/images/hosted/4nbFFCV.png" alt="Prevention Icon" className="w-12 h-12" />, 
