@@ -6,15 +6,15 @@ import PaymentApprovalModal from './components/PaymentApprovalModal';
 import Loader from './components/Loader';
 
 const MAP_CONTAINER_STYLE = { width: '100%', height: '100%', minHeight: '450px' };
-const DESTINATION = { lat: -1.1921635987964438, lng: 36.94331377496547 };
+const DESTINATION = { lat: -1.1295692, lng: 36.9846301 };
 const MAP_CENTER = DESTINATION;
 
 function Logo() {
   return (
     <div className="flex items-center gap-4">
-      <img src="/images/hosted/xgNrrHt.png" alt="Oasis Wellness Foundation Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
+      <img src="/images/hosted/xgNrrHt.png" alt="Kamwaki Wellness Foundation Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
       <div className="flex flex-col">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Oasis Wellness Foundation</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Kamwaki Wellness Foundation</h1>
         <div className="flex flex-col">
           <p className="text-sm md:text-base text-coral-500">Recover With Dignity</p>
         </div>
@@ -34,12 +34,12 @@ function ImageSlideshow() {
   const [direction, setDirection] = useState<'left' | 'right'>('right');
 
   const images = [
-    { url: "/images/hosted/iIc6xs5.jpg", alt: "Oasis Wellness Foundation Event 1" },
-    { url: "/images/hosted/q3lmvYB.jpg", alt: "Oasis Wellness Foundation Event 2" },
-    { url: "/images/hosted/p1BerMb.jpg", alt: "Oasis Wellness Foundation Event 3" },
-    { url: "/images/hosted/L8nmapU.jpg", alt: "Oasis Wellness Foundation Event 4" },
-    { url: "/images/hosted/iDBDk9y.jpg", alt: "Oasis Wellness Foundation Event 5" },
-    { url: "/images/hosted/0Q1DGfU.jpg", alt: "Oasis Wellness Foundation Event 6"}
+    { url: "/images/hosted/iIc6xs5.jpg", alt: "Kamwaki Wellness Foundation Event 1" },
+    { url: "/images/hosted/q3lmvYB.jpg", alt: "Kamwaki Wellness Foundation Event 2" },
+    { url: "/images/hosted/p1BerMb.jpg", alt: "Kamwaki Wellness Foundation Event 3" },
+    { url: "/images/hosted/L8nmapU.jpg", alt: "Kamwaki Wellness Foundation Event 4" },
+    { url: "/images/hosted/iDBDk9y.jpg", alt: "Kamwaki Wellness Foundation Event 5" },
+    { url: "/images/hosted/0Q1DGfU.jpg", alt: "Kamwaki Wellness Foundation Event 6"}
   ];
 
   const nextSlide = useCallback(() => {
@@ -267,9 +267,9 @@ function App() {
   };
 
   const directionsUrl =
-    "https://www.google.com/maps/dir/?api=1&origin=current+location&destination=-1.1921635987964438,36.94331377496547&travelmode=walking&dir_action=navigate";
+    "https://www.google.com/maps/dir/?api=1&origin=current+location&destination=-1.1295692,36.9846301&travelmode=walking&dir_action=navigate";
   const placeEmbedUrl =
-    "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2722.002058935964!2d36.94480852201997!3d-1.1923852933770536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMTEnMzEuOCJTIDM2wrA1Nic0NS4yIkU!5e0!3m2!1sen!2ske!4v1772223201907!5m2!1sen!2ske";
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255283.44798030372!2d36.53355508671874!3d-1.2920658999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11003397df05%3A0x41146d2ae94cb9a7!2sruiru%20toll%20station!5e0!3m2!1sen!2ske!4v1788439883391!5m2!1sen!2ske";
 
   if (isInitialLoad) {
     return (
@@ -285,11 +285,11 @@ function App() {
         <div className="relative z-10 flex flex-col items-center">
           <img
             src="/images/hosted/xgNrrHt.png"
-            alt="Oasis Wellness Foundation Logo"
+            alt="Kamwaki Wellness Foundation Logo"
             className="w-24 h-24 md:w-32 md:h-32 object-contain mb-6"
           />
           <h1 className="text-2xl md:text-3xl font-bold text-teal-400 text-center mb-2">
-            Oasis Wellness Foundation
+            Kamwaki Wellness Foundation
           </h1>
           <p className="text-coral-400 text-sm md:text-base text-center mb-8 italic">we care</p>
           <p className="text-lg md:text-xl font-semibold text-center mb-4 text-teal-100">
@@ -420,7 +420,7 @@ function App() {
                 <div>
                   <h3 className="text-2xl font-semibold mb-4 text-teal-400">Our Story</h3>
                   <p className="text-gray-600 mb-6">
-                    Oasis Wellness Foundation was established in 2020 after recognizing the urgent need to support individuals and communities affected by drug and substance disorders. Many people were willing to recover but lacked the necessary support systems.
+                    Kamwaki Wellness Foundation was established in 2020 after recognizing the urgent need to support individuals and communities affected by drug and substance disorders. Many people were willing to recover but lacked the necessary support systems.
                   </p>
                   <p className="text-gray-600">
                     Our organization provides both inpatient and outpatient care, guiding individuals on their journey to recovery while also promoting community wellness initiatives. Through a compassionate and structured approach, we strive to empower individuals to regain control of their lives and achieve lasting well-being.
@@ -556,7 +556,7 @@ function App() {
                   </div>
 
                   <p className="text-gray-600 leading-relaxed">
-                    Oasis Wellness Foundation collaborates with CHPs across counties to strengthen community-based health support systems. By working alongside these frontline health workers, we promote wellness education, addiction awareness, and community-based prevention programs that improve the health and well-being of communities.
+                    Kamwaki Wellness Foundation collaborates with CHPs across counties to strengthen community-based health support systems. By working alongside these frontline health workers, we promote wellness education, addiction awareness, and community-based prevention programs that improve the health and well-being of communities.
                   </p>
                 </div>
               </div>
@@ -699,39 +699,23 @@ function App() {
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Find Us</h2>
               <p className="text-gray-500 text-sm text-center max-w-2xl mx-auto mb-6">
-                Use the map below to pan, zoom, and view the route from your current location to <span className="font-semibold">Oasis Wellness Foundation</span>.
+                Use the map below to pan, zoom, and view the route from your current location to <span className="font-semibold">Kamwaki Wellness Foundation</span>.
                 When asked, please allow location access so we can draw the trail.
               </p>
 
-              <div className="rounded-xl overflow-hidden shadow-lg max-w-5xl mx-auto" style={{ minHeight: 450 }}>
+              <div className="rounded-xl overflow-hidden shadow-lg max-w-5xl mx-auto" style={{ height: 450 }}>
                 {!googleMapsApiKey ? (
-                  <>
-                    <iframe
-                      src={placeEmbedUrl}
-                      title="Oasis Wellness Foundation location"
-                      className="w-full h-full min-h-[300px]"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    />
-                    <div className="mt-3 flex flex-col items-center gap-2 pb-1">
-                      <a
-                        href={directionsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
-                      >
-                        <Navigation className="w-4 h-4" />
-                        Open directions in Google Maps
-                      </a>
-                      <p className="text-gray-400 text-xs">
-                        Add <code className="text-[0.7rem] bg-gray-100 px-1 rounded">VITE_GOOGLE_MAPS_API_KEY</code> in <code className="text-[0.7rem] bg-gray-100 px-1 rounded">.env</code> to show the live route here.
-                      </p>
-                    </div>
-                  </>
+                  <iframe
+                    src={placeEmbedUrl}
+                    title="Kamwaki Wellness Foundation location"
+                    className="w-full h-full"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
                 ) : mapsLoadError ? (
-                  <div className="flex flex-col items-center justify-center gap-4 p-6 min-h-[300px]">
+                  <div className="flex flex-col items-center justify-center gap-4 p-6 h-full">
                     <p className="text-gray-600 text-center">
                       The interactive map failed to load. You can still get directions in Google Maps.
                     </p>
@@ -742,15 +726,15 @@ function App() {
                       className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
                     >
                       <Navigation className="w-4 h-4" />
-                      Open directions in Google Maps
+                      Start in Google Maps
                     </a>
                   </div>
                 ) : !isMapsLoaded ? (
-                  <div className="flex items-center justify-center min-h-[300px] text-gray-500 text-sm">
+                  <div className="flex items-center justify-center h-full text-gray-500 text-sm">
                     Loading interactive map…
                   </div>
                 ) : locationError ? (
-                  <div className="flex flex-col items-center justify-center gap-4 p-6 min-h-[300px]">
+                  <div className="flex flex-col items-center justify-center gap-4 p-6 h-full">
                     <p className="text-gray-600 text-center">
                       {locationError}
                     </p>
@@ -761,7 +745,7 @@ function App() {
                       className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-lg text-sm"
                     >
                       <Navigation className="w-4 h-4" />
-                      Open directions in Google Maps
+                      Start in Google Maps
                     </a>
                   </div>
                 ) : (
@@ -818,7 +802,7 @@ function App() {
                     </div>
                     <div className="flex items-center">
                       <Mail className="w-6 h-6 text-coral-500 mr-3" />
-                      <p>oasiswellness2021@gmail.com</p>
+                      <p>Kamwakii2020@gmail.com</p>
                     </div>
                     <div className="flex items-center">
                       <MapPin className="w-6 h-6 text-coral-500 mr-3" />
@@ -826,7 +810,7 @@ function App() {
                         href="#find-us"
                         className="text-left text-gray-700 hover:text-teal-400 transition-colors"
                       >
-                        Kahawa Sukari
+                        Ruiru Toll
                       </a>
                     </div>
                     <p className="ml-9">P.O. Box: 64069-00620, Muthaiga</p>
@@ -905,7 +889,7 @@ function App() {
               <div className="space-y-2 text-gray-400 text-sm">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-coral-500" />
-                  <p>oasiswellness2021@gmail.com</p>
+                  <p>Kamwakii2020@gmail.com</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-coral-500" />
@@ -914,7 +898,7 @@ function App() {
                       href="#find-us"
                       className="hover:text-teal-400 transition-colors"
                     >
-                      Kahawa Sukari
+                      Ruiru Toll
                     </a>
                     <p className="mt-1">P.O Box 64069-00620, Muthaiga</p>
                   </div>
@@ -927,12 +911,11 @@ function App() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400 text-sm">
-            <p>&copy; 2026 Oasis Wellness Foundation. All rights reserved.</p>
+            <p>&copy; 2026 Kamwaki Wellness Foundation. All rights reserved.</p>
             <div className="mt-3 text-xs flex items-center justify-center gap-2">
               <span>Developed and Maintained by</span>
-              <a href="https://astraronix.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-coral-500 hover:underline">
-                <img src="/images/hosted/T7mH4Ly.png" alt="Astraronix Solutions Logo" className="h-5" />
-                <span>Astraronix Solutions</span>
+              <a href="https://astraronixgroup.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-coral-500 hover:underline">
+                <img src="/images/astraronixgroupverticaldark.avif" alt="Astraronix Solutions Logo" className="h-5" />
               </a>
             </div>
           </div>
