@@ -58,7 +58,7 @@ export const NavigationModal: React.FC<NavigationModalProps> = ({
             Live walking navigation
           </span>
           <span className="text-sm font-semibold text-gray-800">
-            Kamwaki Wellness Foundation
+            Kamwakii Mental Wellness Foundation
           </span>
         </div>
         <button

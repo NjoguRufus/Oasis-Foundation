@@ -32,12 +32,12 @@ const LocationPermissionPrompt: React.FC<LocationPermissionPromptProps> = ({
         <div className="flex items-center gap-3 mb-3">
           <img
             src={LOGO_URL}
-            alt="Kamwaki Recovery Home"
+            alt="Kamwakii Mental Wellness Foundation"
             className="w-12 h-12 object-contain"
           />
           <div className="flex flex-col">
             <div className="text-xs font-semibold uppercase tracking-wide text-teal-500">
-              Kamwaki Recovery Home
+              Kamwakii Mental Wellness Foundation
             </div>
             <div className="text-base md:text-lg font-semibold text-gray-800">
               Allow location access
@@ -50,7 +50,7 @@ const LocationPermissionPrompt: React.FC<LocationPermissionPromptProps> = ({
             <MapPin className="w-5 h-5" aria-hidden />
           </span>
           <p className="text-gray-600 text-sm md:text-base">
-            We use your location only to show your route to Kamwaki Recovery Home.
+            We use your location only to show your route to Kamwakii Mental Wellness Foundation.
             Your data stays on your device.
           </p>
         </div>

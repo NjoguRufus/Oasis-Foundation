@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Phone, Mail, MapPin, Users, Brain, Sparkles, ArrowRight, Facebook, Twitter, Instagram, Apple as WhatsApp, Menu, X, ChevronLeft, ChevronRight, Navigation, HeartHandshake } from 'lucide-react';
 import { useJsApiLoader, GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import NavigationModal from './components/NavigationModal';
@@ -9,12 +9,80 @@ const MAP_CONTAINER_STYLE = { width: '100%', height: '100%', minHeight: '450px' 
 const DESTINATION = { lat: -1.1295692, lng: 36.9846301 };
 const MAP_CENTER = DESTINATION;
 
+type FaceBox = { x: number; y: number; w: number; h: number };
+
+function FaceBlurOverlay({
+  imgRef,
+  box,
+  naturalWidth,
+  naturalHeight,
+}: {
+  imgRef: React.RefObject<HTMLImageElement>;
+  box: FaceBox;
+  naturalWidth: number;
+  naturalHeight: number;
+}) {
+  const [style, setStyle] = useState<React.CSSProperties>({ opacity: 0 });
+
+  useEffect(() => {
+    const img = imgRef.current;
+    if (!img) return;
+
+    const update = () => {
+      const cw = img.clientWidth;
+      const ch = img.clientHeight;
+      if (!cw || !ch) return;
+
+      // Replicates object-fit: cover's math so the overlay tracks the
+      // face's true source-pixel position regardless of how much of the
+      // image's width/height gets cropped at the current container size.
+      const scale = Math.max(cw / naturalWidth, ch / naturalHeight);
+      const displayedW = naturalWidth * scale;
+      const displayedH = naturalHeight * scale;
+      const offsetX = (displayedW - cw) / 2;
+      const offsetY = (displayedH - ch) / 2;
+
+      setStyle({
+        left: `${((box.x * scale - offsetX) / cw) * 100}%`,
+        top: `${((box.y * scale - offsetY) / ch) * 100}%`,
+        width: `${((box.w * scale) / cw) * 100}%`,
+        height: `${((box.h * scale) / ch) * 100}%`,
+        opacity: 1,
+      });
+    };
+
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(img);
+    window.addEventListener('resize', update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', update);
+    };
+  }, [imgRef, box, naturalWidth, naturalHeight]);
+
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute pointer-events-none"
+      style={{
+        ...style,
+        borderRadius: '50%',
+        backdropFilter: 'blur(18px)',
+        WebkitBackdropFilter: 'blur(18px)',
+        maskImage: 'radial-gradient(ellipse at center, black 55%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse at center, black 55%, transparent 100%)',
+      }}
+    />
+  );
+}
+
 function Logo() {
   return (
     <div className="flex items-center gap-4">
-      <img src="/images/hosted/xgNrrHt.png" alt="Kamwaki Wellness Foundation Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
+      <img src="/images/hosted/xgNrrHt.png" alt="Kamwakii Mental Wellness Foundation Logo" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
       <div className="flex flex-col">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Kamwaki Wellness Foundation</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-teal-500">Kamwakii Mental Wellness Foundation</h1>
         <div className="flex flex-col">
           <p className="text-sm md:text-base text-coral-500">Recover With Dignity</p>
         </div>
@@ -34,12 +102,12 @@ function ImageSlideshow() {
   const [direction, setDirection] = useState<'left' | 'right'>('right');
 
   const images = [
-    { url: "/images/hosted/iIc6xs5.jpg", alt: "Kamwaki Wellness Foundation Event 1" },
-    { url: "/images/hosted/q3lmvYB.jpg", alt: "Kamwaki Wellness Foundation Event 2" },
-    { url: "/images/hosted/p1BerMb.jpg", alt: "Kamwaki Wellness Foundation Event 3" },
-    { url: "/images/hosted/L8nmapU.jpg", alt: "Kamwaki Wellness Foundation Event 4" },
-    { url: "/images/hosted/iDBDk9y.jpg", alt: "Kamwaki Wellness Foundation Event 5" },
-    { url: "/images/hosted/0Q1DGfU.jpg", alt: "Kamwaki Wellness Foundation Event 6"}
+    { url: "/images/hosted/iIc6xs5.jpg", alt: "Kamwakii Mental Wellness Foundation Event 1" },
+    { url: "/images/hosted/q3lmvYB.jpg", alt: "Kamwakii Mental Wellness Foundation Event 2" },
+    { url: "/images/hosted/p1BerMb.jpg", alt: "Kamwakii Mental Wellness Foundation Event 3" },
+    { url: "/images/hosted/L8nmapU.jpg", alt: "Kamwakii Mental Wellness Foundation Event 4" },
+    { url: "/images/hosted/iDBDk9y.jpg", alt: "Kamwakii Mental Wellness Foundation Event 5" },
+    { url: "/images/hosted/0Q1DGfU.jpg", alt: "Kamwakii Mental Wellness Foundation Event 6"}
   ];
 
   const nextSlide = useCallback(() => {
@@ -182,6 +250,7 @@ function App() {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [directionsResult, setDirectionsResult] = useState<google.maps.DirectionsResult | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const impactImgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsInitialLoad(false), 2000);
@@ -285,11 +354,11 @@ function App() {
         <div className="relative z-10 flex flex-col items-center">
           <img
             src="/images/hosted/xgNrrHt.png"
-            alt="Kamwaki Wellness Foundation Logo"
+            alt="Kamwakii Mental Wellness Foundation Logo"
             className="w-24 h-24 md:w-32 md:h-32 object-contain mb-6"
           />
           <h1 className="text-2xl md:text-3xl font-bold text-teal-400 text-center mb-2">
-            Kamwaki Wellness Foundation
+            Kamwakii Mental Wellness Foundation
           </h1>
           <p className="text-coral-400 text-sm md:text-base text-center mb-8 italic">we care</p>
           <p className="text-lg md:text-xl font-semibold text-center mb-4 text-teal-100">
@@ -420,7 +489,7 @@ function App() {
                 <div>
                   <h3 className="text-2xl font-semibold mb-4 text-teal-400">Our Story</h3>
                   <p className="text-gray-600 mb-6">
-                    Kamwaki Wellness Foundation was established in 2020 after recognizing the urgent need to support individuals and communities affected by drug and substance disorders. Many people were willing to recover but lacked the necessary support systems.
+                    Kamwakii Mental Wellness Foundation was established in 2020 after recognizing the urgent need to support individuals and communities affected by drug and substance disorders. Many people were willing to recover but lacked the necessary support systems.
                   </p>
                   <p className="text-gray-600">
                     Our organization provides both inpatient and outpatient care, guiding individuals on their journey to recovery while also promoting community wellness initiatives. Through a compassionate and structured approach, we strive to empower individuals to regain control of their lives and achieve lasting well-being.
@@ -435,11 +504,18 @@ function App() {
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Our Impact</h2>
               <div className="space-y-16">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                  <div>
-                    <img 
-                      src="/images/hosted/EVjvCqE.jpg" 
-                      alt="Helping those affected by addiction" 
+                  <div className="relative">
+                    <img
+                      ref={impactImgRef}
+                      src="/images/hosted/EVjvCqE.jpg"
+                      alt="Helping those affected by addiction"
                     className="rounded-lg shadow-lg w-full h-[400px] object-cover"
+                    />
+                    <FaceBlurOverlay
+                      imgRef={impactImgRef}
+                      box={{ x: 335, y: 215, w: 235, h: 235 }}
+                      naturalWidth={1280}
+                      naturalHeight={960}
                     />
                   </div>
                   <div>
@@ -556,7 +632,7 @@ function App() {
                   </div>
 
                   <p className="text-gray-600 leading-relaxed">
-                    Kamwaki Wellness Foundation collaborates with CHPs across counties to strengthen community-based health support systems. By working alongside these frontline health workers, we promote wellness education, addiction awareness, and community-based prevention programs that improve the health and well-being of communities.
+                    Kamwakii Mental Wellness Foundation collaborates with CHPs across counties to strengthen community-based health support systems. By working alongside these frontline health workers, we promote wellness education, addiction awareness, and community-based prevention programs that improve the health and well-being of communities.
                   </p>
                 </div>
               </div>
@@ -699,7 +775,7 @@ function App() {
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">Find Us</h2>
               <p className="text-gray-500 text-sm text-center max-w-2xl mx-auto mb-6">
-                Use the map below to pan, zoom, and view the route from your current location to <span className="font-semibold">Kamwaki Wellness Foundation</span>.
+                Use the map below to pan, zoom, and view the route from your current location to <span className="font-semibold">Kamwakii Mental Wellness Foundation</span>.
                 When asked, please allow location access so we can draw the trail.
               </p>
 
@@ -707,7 +783,7 @@ function App() {
                 {!googleMapsApiKey ? (
                   <iframe
                     src={placeEmbedUrl}
-                    title="Kamwaki Wellness Foundation location"
+                    title="Kamwakii Mental Wellness Foundation location"
                     className="w-full h-full"
                     style={{ border: 0 }}
                     allowFullScreen
@@ -911,7 +987,7 @@ function App() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-6 pt-6 text-center text-gray-400 text-sm">
-            <p>&copy; 2026 Kamwaki Wellness Foundation. All rights reserved.</p>
+            <p>&copy; 2026 Kamwakii Mental Wellness Foundation. All rights reserved.</p>
             <div className="mt-3 text-xs flex items-center justify-center gap-2">
               <span>Developed and Maintained by</span>
               <a href="https://astraronixgroup.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-coral-500 hover:underline">
